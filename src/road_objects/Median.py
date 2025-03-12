@@ -35,8 +35,8 @@ class Median(RoadObject):
             post_gap becomes pre_gap for the next median
         """
         self.post_gap = max(self._median_gap_length((self.end_x - SCREEN_WIDTH * 0.31), SCREEN_HEIGHT - self.end_y), 1)
-        next_start_x = self.end_x + self._find_side_length(MEDIAN_LINE_ANGLE, self.post_gap, "cos")
-        next_start_y = self.end_y - self._find_side_length(MEDIAN_LINE_ANGLE, self.post_gap, "sin")
+        next_start_x = self.end_x + self._find_side_length(MEDIAN_LINE_ANGLE, self.post_gap, "cos", mode="deg")
+        next_start_y = self.end_y - self._find_side_length(MEDIAN_LINE_ANGLE, self.post_gap, "sin", mode="deg")
 
         self.next = Median(next_start_x, next_start_y, pre_gap=self.post_gap, prev=self)
     
@@ -50,15 +50,15 @@ class Median(RoadObject):
         """
         if forward:
             move_length = max(rate * self.pre_gap, 1) # Make it necessary to move 1 pixel
-            self.start_x -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos")
-            self.start_y += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin")
+            self.start_x -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos", mode="deg")
+            self.start_y += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin", mode="deg")
             if self.prev:
                 self.pre_gap = self.prev.post_gap
         
         else:
             move_length = max(rate * self.post_gap, 1)
-            self.start_x += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos")
-            self.start_y -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin")
+            self.start_x += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos", mode="deg")
+            self.start_y -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin", mode="deg")
         
         self._calculate_median()
 
@@ -76,8 +76,8 @@ class Median(RoadObject):
             Calculates the ending point for the current median based on the starting point of start_x, start_y. 
         """
         self.line_length = max(self._median_line_length(self.start_x - SCREEN_WIDTH * 0.31, SCREEN_HEIGHT - self.start_y), 1)
-        self.end_y = self.start_y - self._find_side_length(MEDIAN_LINE_ANGLE, self.line_length, func="sin")
-        self.end_x = self.start_x + self._find_side_length(MEDIAN_LINE_ANGLE, self.line_length, func="cos")
+        self.end_y = self.start_y - self._find_side_length(MEDIAN_LINE_ANGLE, self.line_length, func="sin", mode="deg")
+        self.end_x = self.start_x + self._find_side_length(MEDIAN_LINE_ANGLE, self.line_length, func="cos", mode="deg")
 
     def _median_line_length(self, x: float, y: float):
         """

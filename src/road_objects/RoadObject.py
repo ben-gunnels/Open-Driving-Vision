@@ -4,16 +4,19 @@ class RoadObject:
     def __init__(self, *args):
         self.name = args[0]
 
-    def _find_side_length(self, angle: float, hyp: float, func: str ="sin"):
+    def _find_side_length(self, angle: float, hyp: float, func: str ="sin", mode="rad"):
         """
-            Finds the length of a side leg givent the hypotenuse and the angle. 
+            Finds the length of a side leg given the hypotenuse and the angle. 
         
         """
+        if mode == "deg":
+            angle = angle * (np.pi / 180)
+
         if func == "sin":
-            return hyp * np.sin(angle * (np.pi / 180))
+            return hyp * np.sin(angle)
         
         elif func == "cos":
-            return hyp * np.cos(angle * (np.pi / 180))
+            return hyp * np.cos(angle)
         
     def _find_hyp(self, sideA, sideB):
         """
