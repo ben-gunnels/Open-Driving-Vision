@@ -3,22 +3,20 @@ import numpy as np
 from .road_objects.Median import Median
 from .road_objects.Point import Point
 from .algorithms.Algorithms import (find_new_head)
+from .const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT, CENTER, MEDIAN_LINE_ANGLE, ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH, OUTPUT_PATH)
 import time
 import sys
+import os
 import logging
 
+if not os.path.exists("./src/logs"):
+    os.mkdir("./src/logs")
+
+if os.path.exists("./src/logs/app.log"):
+    os.remove("./src/logs/app.log")
+
 # Configure logging
-logging.basicConfig(filename="app.log", level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
-
-SCREEN_HEIGHT, SCREEN_WIDTH = 800, 1216
-CENTER = (SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-ROAD_LINE_MAX_LENGTH = int(SCREEN_HEIGHT * 0.18)
-ROAD_LINE_GAP_MAX_LENGTH  = int(SCREEN_HEIGHT * 0.2232)
-
-MEDIAN_LINE_ANGLE = 63.018
-HORIZON_HEIGHT = 0.45
-
-OUTPUT_PATH = ".\src\outputs"
+logging.basicConfig(filename="src/logs/app.log", level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
     
 road_lines = {
     "left" : {
@@ -48,10 +46,10 @@ road_lines = {
 }
 
 points = [
-    Point(SCREEN_WIDTH * 0.6, SCREEN_HEIGHT * 0.4 - 5, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
-    Point(SCREEN_WIDTH * 0.6 - 5, SCREEN_HEIGHT * 0.4, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
-    Point(SCREEN_WIDTH * 0.6, SCREEN_HEIGHT * 0.4 + 5, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
-    Point(SCREEN_WIDTH * 0.6 + 5, SCREEN_HEIGHT * 0.4, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
+    Point(SCREEN_WIDTH * 0.52, SCREEN_HEIGHT * 0.44 - 5, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
+    Point(SCREEN_WIDTH * 0.52 - 5, SCREEN_HEIGHT * 0.44, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
+    Point(SCREEN_WIDTH * 0.52, SCREEN_HEIGHT * 0.44 + 5, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
+    Point(SCREEN_WIDTH * 0.52 + 5, SCREEN_HEIGHT * 0.44, CENTER, (0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)),
 ]
 
 imgs = [np.ones((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) * 0 for _ in range(60)]
@@ -84,7 +82,7 @@ for i in range(60):
     logging.info(f"ITERATION: {i}")
     median = head
     while median.next:
-        if median.start_y > int(SCREEN_HEIGHT * 0.45):
+        if median.start_y > int(SCREEN_HEIGHT * HORIZON_HEIGHT):
             median.draw(imgs[i])
         median = median.next
 

@@ -2,12 +2,9 @@ import numpy as np
 import cv2
 
 from .RoadObject import RoadObject
+from ..const.constants import (SCREEN_WIDTH, SCREEN_HEIGHT, MEDIAN_LINE_ANGLE, ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH)
 
-SCREEN_HEIGHT, SCREEN_WIDTH = 800, 1216
-ROAD_LINE_MAX_LENGTH = int(SCREEN_HEIGHT * 0.18)
-ROAD_LINE_GAP_MAX_LENGTH  = int(SCREEN_HEIGHT * 0.2232)
 
-MEDIAN_LINE_ANGLE = 63.018
 
 class Median(RoadObject):
     def __init__(self, *args, **kwargs):
