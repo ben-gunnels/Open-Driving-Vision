@@ -1,0 +1,11 @@
+class Colors:
+    white = (255, 255, 255)
+    black = (0, 0, 0)
+    red = (0, 0, 255)
+    green = (0, 255, 0)
+    grass_green = (21, 109, 19)
+    wood_brown = (19, 69, 139)
+    yellow = (0, 255, 255)
+    silver = (211, 211, 211)
+    blue = (255, 0, 0)
+    orange = (0, 165, 255)

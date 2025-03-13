@@ -4,18 +4,16 @@ import cv2
 from .RoadObject import RoadObject
 from ..const.constants import (SCREEN_WIDTH, SCREEN_HEIGHT, MEDIAN_LINE_ANGLE, ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH)
 
-
-
 class Median(RoadObject):
     def __init__(self, *args, **kwargs):
-        super().__init__("median")
+        super().__init__("median", args[2], args[3]) # Median doesn't require bounds or center
         self.start_x = args[0]
         self.start_y = args[1]
 
         self.pre_gap = kwargs.get("pre_gap", 0) # The gap that comes before a line
         self.post_gap = None
 
-        self.color = (0, 255, 255)
+        self.color = kwargs.get("color", (0, 255, 255))
 
         self.line = None
 
@@ -35,9 +33,9 @@ class Median(RoadObject):
         next_start_x = self.end_x + self._find_side_length(MEDIAN_LINE_ANGLE, self.post_gap, "cos", mode="deg")
         next_start_y = self.end_y - self._find_side_length(MEDIAN_LINE_ANGLE, self.post_gap, "sin", mode="deg")
 
-        self.next = Median(next_start_x, next_start_y, pre_gap=self.post_gap, prev=self)
+        self.next = Median(next_start_x, next_start_y, self.center, self.bounds, pre_gap=self.post_gap, prev=self)
     
-    def move(self, rate: float, forward: bool = True):
+    def move(self, rate: float):
         """
             Move the median line in the desired direction. This function should only be applied to the median at head.
             The next medians should then be recursively calculated using calculate_next_median
@@ -45,17 +43,12 @@ class Median(RoadObject):
                 rate - The percentage of the pregap that should be covered in a move. 
                 forward - specifies the direction the car is perceived to be moving.
         """
-        if forward:
-            move_length = max(rate * self.pre_gap, 1) # Make it necessary to move 1 pixel
-            self.start_x -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos", mode="deg")
-            self.start_y += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin", mode="deg")
-            if self.prev:
-                self.pre_gap = self.prev.post_gap
-        
-        else:
-            move_length = max(rate * self.post_gap, 1)
-            self.start_x += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos", mode="deg")
-            self.start_y -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin", mode="deg")
+        move_length = max(rate * self.pre_gap, 1) # Make it necessary to move 1 pixel
+        self.start_x -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos", mode="deg")
+        self.start_y += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin", mode="deg")
+        if self.prev:
+            self.pre_gap = self.prev.post_gap
+
         
         self._calculate_median()
 

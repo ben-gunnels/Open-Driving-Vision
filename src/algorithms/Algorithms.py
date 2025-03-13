@@ -1,5 +1,5 @@
 import sys
-from ..road_objects.Median import Median
+from ..sim_objects.Median import Median
 
 def find_new_head(head: Median):
     """
