@@ -10,6 +10,7 @@ from .sim_objects.road_objects.RoadSign import RoadSign
 from .generators.RoadSignGenerator import RoadSignGenerator
 from .sim_objects.Colors import Colors
 from .algorithms.Algorithms import (find_new_head)
+from .video_playback import video_playback
 from .const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT, CENTER, BOUNDS, MEDIAN_LINE_ANGLE,
                                ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH, OUTPUT_PATH,
                                LEFT_ROAD_LINE_START_HEIGHT1, LEFT_ROAD_LINE_START_HEIGHT2, LEFT_ROAD_LINE_END_WIDTH,
@@ -89,7 +90,9 @@ road_signs = ["diamond_warning_sign",
               "traffic_cone"
               ]
 
-road_sign = roadsign_generator.generate_roadsign(road_signs[0])
+sign = "speed_limit_sign"
+
+road_sign = roadsign_generator.generate_roadsign(sign)
 imgs = [np.ones((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) * 0 for _ in range(60)]
 
 for img in imgs:
@@ -127,10 +130,11 @@ for i in range(60):
     #     point.move(0.1)
     road_sign.draw(imgs[i])
     road_sign.move(0.1)
+    filename = f"output_{str(i).zfill(3)}.png"
 
-    cv2.imwrite(OUTPUT_PATH + f"\output_{i}.png", imgs[i])
+    cv2.imwrite(OUTPUT_PATH + f"\{filename}", imgs[i])
 
-    head.move(0.4)
+    head.move(0.2)
     median = head
     j = 0
     for i in range(60):
@@ -141,6 +145,8 @@ for i in range(60):
 
     head = find_new_head(head)
 
-cv2.imshow('Image', img)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+video_playback(sign)
+
+# cv2.imshow('Image', img)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()

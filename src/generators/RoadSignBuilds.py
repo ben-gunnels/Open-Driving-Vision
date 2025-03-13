@@ -15,7 +15,7 @@ class Builder():
                     "speed_limit_sign": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "speed_limit_sign", "primary_color": colors.white, "secondary_color": colors.silver}},
                     "stop_sign": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "stop_sign", "primary_color": colors.red, "secondary_color": colors.wood_brown}},
                     "small_informational_sign": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "small_informational_sign", "primary_color": colors.green, "secondary_color": colors.silver}},
-                    "large_information_sign": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "large_informational_sign", "primary_color": colors.green, "secondary_color": colors.silver}},
+                    "large_informational_sign": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "large_informational_sign", "primary_color": colors.green, "secondary_color": colors.silver}},
                     "yield_sign": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "yield_sign", "primary_color": colors.red, "secondary_color": colors.wood_brown}},
                     "freeway_sign": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "freeway_sign", "primary_color": colors.blue, "secondary_color": colors.silver}},
                     "traffic_cone": { "args": [(None, None), (None, None), self.center, self.bounds], "kwargs": {"name": "traffic_cone", "primary_color": colors.orange, "secondary_color": colors.white}},
@@ -92,10 +92,10 @@ class Builder():
         """
         x, y = starting_point
         if anchor == "left":
-            return ((x, y), (x+10, y), (x+10, y-1), (x+8, y-1), (x+5, y-15), (x+2, y-1), (x, y-1))
+            return ((x, y), (x+6, y), (x+6, y-1), (x+5, y-1), (x+3, y-6), (x+1, y-1), (x, y-1))
         
         elif anchor == "right":
-            return ((x-10, y), (x, y), (x, y-1), (x-2, y-1), (x-5, y-15), (x-8, y-1), (x-10, y-1))
+            return ((x-6, y), (x, y), (x, y-1), (x-1, y-1), (x-3, y-6), (x-5, y-1), (x-6, y-1))
     
 
 

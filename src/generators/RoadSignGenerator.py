@@ -41,6 +41,7 @@ class RoadSignGenerator:
         else:
             initial_placement = ("left", right_line_placement_generator.randomize_placement())
 
+        
         pole = self.builder.build_pole(initial_placement[1])
         start_sign_point = self._get_sign_start_point(pole)
 
@@ -52,7 +53,7 @@ class RoadSignGenerator:
             "small_informational_sign": self.builder.build_small_informational_sign(start_sign_point),
             "large_informational_sign": self.builder.build_large_informational_sign(start_sign_point),
             "yield_sign": self.builder.build_yield_sign(start_sign_point),
-            "freeway_sign": self.builder.build_yield_sign(start_sign_point),
+            "freeway_sign": self.builder.build_freeway_sign(start_sign_point),
             "traffic_cone": self.builder.build_traffic_cone(initial_placement[1], initial_placement[0])
         }
 
