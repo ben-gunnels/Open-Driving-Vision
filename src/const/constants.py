@@ -27,6 +27,7 @@ DEBUG = False
 DURATION = 140
 
 FRAME_RATE = 10
+MAX_CHAOS = 10
 
 IMG_OUTPUT_PATH = ".\src\outputs\images"
 LABELS_OUTPUT_PATH = ".\src\outputs\labels"
