@@ -15,6 +15,7 @@ class RoadSign(RoadObject):
         self._initialize_pole_points(pole) # For the pole attached to the sign
         self.primary_color = kwargs.get("primary_color", colors.red)
         self.secondary_color = kwargs.get("secondary_color", colors.wood_brown)
+        self.reverse_sign = kwargs.get("reverse_sign", False)
 
     def move(self, rate: float):
         for pt in self.sign_points:
@@ -29,9 +30,15 @@ class RoadSign(RoadObject):
         if not valid:
             return
 
-        if self.name != "traffic_cone":
-            cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
-        cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.primary_color)  # Fill with red
+        if self.reverse_sign:
+            primary_col = colors.silver if self.name != "traffic_cone" else self.primary_color
+            cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], primary_col)  # Fill with red
+            if self.name != "traffic_cone":
+                cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
+        else:
+            if self.name != "traffic_cone":
+                cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
+            cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.primary_color)  # Fill with red
 
     def _initialize_sign_points(self, points):
         """

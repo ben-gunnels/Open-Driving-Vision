@@ -15,7 +15,7 @@ from .const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT, CENTE
                                ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH, OUTPUT_PATH,
                                LEFT_ROAD_LINE_START_HEIGHT1, LEFT_ROAD_LINE_START_HEIGHT2, LEFT_ROAD_LINE_END_WIDTH,
                                RIGHT_ROAD_LINE_START_WIDTH1, RIGHT_ROAD_LINE_START_WIDTH2, RIGHT_ROAD_LINE_END_WIDTH,
-                               DEBUG
+                               DEBUG, DURATION
                                )
 
 colors = Colors()
@@ -90,10 +90,10 @@ road_signs = ["diamond_warning_sign",
               "traffic_cone"
               ]
 
-sign = "speed_limit_sign"
+sign = "stop_sign"
 
 road_sign = roadsign_generator.generate_roadsign(sign)
-imgs = [np.ones((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) * 0 for _ in range(60)]
+imgs = [np.ones((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) * 0 for _ in range(DURATION)]
 
 for img in imgs:
     for line in road_lines:
@@ -116,7 +116,7 @@ for i in range(60):
     median.calculate_next_median()
     median = median.next
 
-for i in range(60):
+for i in range(DURATION):
     logging.info(f"ITERATION: {i}")
     median = head
     while median.next:
@@ -129,12 +129,12 @@ for i in range(60):
     #     point.draw(imgs[i], i)
     #     point.move(0.1)
     road_sign.draw(imgs[i])
-    road_sign.move(0.1)
+    road_sign.move(0.03)
     filename = f"output_{str(i).zfill(3)}.png"
 
     cv2.imwrite(OUTPUT_PATH + f"\{filename}", imgs[i])
 
-    head.move(0.2)
+    head.move(0.06)
     median = head
     j = 0
     for i in range(60):

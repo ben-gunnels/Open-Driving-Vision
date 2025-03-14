@@ -37,10 +37,11 @@ class RoadSignGenerator:
         roadsign_params = self.builder.builds[roadsign_name].copy()
         
         if (random.random() < LEFT_PLACEMENT_PROB):
-            initial_placement = ("right", left_line_placement_generator.randomize_placement())
+            # left means that its anchored to the left road line
+            initial_placement = ("left", left_line_placement_generator.randomize_placement())
         else:
-            initial_placement = ("left", right_line_placement_generator.randomize_placement())
-
+            # right means that its anchored to the right road line
+            initial_placement = ("right", right_line_placement_generator.randomize_placement())
         
         pole = self.builder.build_pole(initial_placement[1])
         start_sign_point = self._get_sign_start_point(pole)
@@ -62,9 +63,11 @@ class RoadSignGenerator:
         roadsign_params["args"][0] = main_shape
         roadsign_params["args"][1] = pole
         roadsign_params["args"] = tuple(roadsign_params["args"])
+
+        roadsign_params["kwargs"]["reverse_sign"] = initial_placement[0] == "left"
+            
         return RoadSign(*roadsign_params["args"], **roadsign_params["kwargs"])
         
-
     def _get_sign_start_point(self, pole):
         return ((pole[2][0] + pole[3][0]) / 2, pole[2][1])
 
