@@ -27,6 +27,8 @@ DEBUG = False
 DURATION = 140
 
 FRAME_RATE = 10
-OUTPUT_PATH = ".\src\outputs"
+
+IMG_OUTPUT_PATH = ".\src\outputs\images"
+LABELS_OUTPUT_PATH = ".\src\outputs\labels"
 VIDEO_OUTPUT_PATH = ".\src\test"
 

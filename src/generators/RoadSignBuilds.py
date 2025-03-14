@@ -16,7 +16,8 @@ class Builder():
                 "kwargs": {
                     "name": "diamond_warning_sign",
                     "primary_color": colors.yellow,
-                    "secondary_color": colors.wood_brown
+                    "secondary_color": colors.wood_brown,
+                    "label_value": 200
                 }
             },
             "speed_limit_sign": {
@@ -24,7 +25,8 @@ class Builder():
                 "kwargs": {
                     "name": "speed_limit_sign",
                     "primary_color": colors.white,
-                    "secondary_color": colors.silver
+                    "secondary_color": colors.silver,
+                    "label_value": 202
                 }
             },
             "stop_sign": {
@@ -32,7 +34,8 @@ class Builder():
                 "kwargs": {
                     "name": "stop_sign",
                     "primary_color": colors.red,
-                    "secondary_color": colors.wood_brown
+                    "secondary_color": colors.wood_brown,
+                    "label_value": 203
                 }
             },
             "small_informational_sign": {
@@ -40,7 +43,8 @@ class Builder():
                 "kwargs": {
                     "name": "small_informational_sign",
                     "primary_color": colors.green,
-                    "secondary_color": colors.silver
+                    "secondary_color": colors.silver,
+                    "label_value": 204
                 }
             },
             "large_informational_sign": {
@@ -48,7 +52,8 @@ class Builder():
                 "kwargs": {
                     "name": "large_informational_sign",
                     "primary_color": colors.green,
-                    "secondary_color": colors.silver
+                    "secondary_color": colors.silver,
+                    "label_value": 205
                 }
             },
             "yield_sign": {
@@ -56,7 +61,8 @@ class Builder():
                 "kwargs": {
                     "name": "yield_sign",
                     "primary_color": colors.red,
-                    "secondary_color": colors.wood_brown
+                    "secondary_color": colors.wood_brown,
+                    "label_value": 206
                 }
             },
             "freeway_sign": {
@@ -64,7 +70,8 @@ class Builder():
                 "kwargs": {
                     "name": "freeway_sign",
                     "primary_color": colors.blue,
-                    "secondary_color": colors.silver
+                    "secondary_color": colors.silver,
+                    "label_value": 207
                 }
             },
             "traffic_cone": {
@@ -72,7 +79,8 @@ class Builder():
                 "kwargs": {
                     "name": "traffic_cone",
                     "primary_color": colors.orange,
-                    "secondary_color": colors.white
+                    "secondary_color": colors.white,
+                    "label_value": 208
                 }
             },
         }

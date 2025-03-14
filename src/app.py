@@ -12,7 +12,7 @@ from .sim_objects.Colors import Colors
 from .algorithms.Algorithms import (find_new_head)
 from .video_playback import video_playback
 from .const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT, CENTER, BOUNDS, MEDIAN_LINE_ANGLE,
-                               ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH, OUTPUT_PATH,
+                               ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH, IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH,
                                LEFT_ROAD_LINE_START_HEIGHT1, LEFT_ROAD_LINE_START_HEIGHT2, LEFT_ROAD_LINE_END_WIDTH,
                                RIGHT_ROAD_LINE_START_WIDTH1, RIGHT_ROAD_LINE_START_WIDTH2, RIGHT_ROAD_LINE_END_WIDTH,
                                DEBUG, DURATION
@@ -26,6 +26,13 @@ if not os.path.exists("./src/logs"):
 
 if os.path.exists("./src/logs/app.log"):
     os.remove("./src/logs/app.log")
+
+if not os.path.exists("./src/outputs/images"):
+    os.mkdir("./src/outputs/images")
+
+if not os.path.exists("./src/outputs/labels"):
+    os.mkdir("./src/outputs/labels")
+
 
 # Configure logging
 logging.basicConfig(filename="src/logs/app.log", level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -67,19 +74,6 @@ road_lines = {
                   }
 }
 
-sign_points = [
-    (SCREEN_WIDTH * 0.52, SCREEN_HEIGHT * HORIZON_HEIGHT - 17),
-    (SCREEN_WIDTH * 0.52 - 5, SCREEN_HEIGHT * HORIZON_HEIGHT - 12),
-    (SCREEN_WIDTH * 0.52, SCREEN_HEIGHT * HORIZON_HEIGHT - 7),
-    (SCREEN_WIDTH * 0.52 + 5, SCREEN_HEIGHT * HORIZON_HEIGHT - 12),
-]
-
-pole_points = [
-    (SCREEN_WIDTH * 0.52 - 1, SCREEN_HEIGHT * HORIZON_HEIGHT - 8),
-    (SCREEN_WIDTH * 0.52 + 1, SCREEN_HEIGHT * HORIZON_HEIGHT - 8),
-    (SCREEN_WIDTH * 0.52 + 1, SCREEN_HEIGHT * HORIZON_HEIGHT + 4),
-    (SCREEN_WIDTH * 0.52 - 1, SCREEN_HEIGHT * HORIZON_HEIGHT + 4),
-]
 road_signs = ["diamond_warning_sign", 
               "speed_limit_sign", 
               "stop_sign", 
@@ -90,10 +84,11 @@ road_signs = ["diamond_warning_sign",
               "traffic_cone"
               ]
 
-sign = "stop_sign"
+sign = "yield_sign"
 
 road_sign = roadsign_generator.generate_roadsign(sign)
-imgs = [np.ones((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) * 0 for _ in range(DURATION)]
+imgs = [np.zeros((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) for _ in range(DURATION)]
+masks = [np.zeros((SCREEN_HEIGHT, SCREEN_WIDTH), dtype=np.uint8) for _ in range(DURATION) ]
 
 for img in imgs:
     for line in road_lines:
@@ -128,12 +123,16 @@ for i in range(DURATION):
     #     # print(f"{j}: {point.x}, {point.y}")
     #     point.draw(imgs[i], i)
     #     point.move(0.1)
-    road_sign.draw(imgs[i])
+    road_sign.draw(imgs[i], masks[i])
     road_sign.move(0.03)
-    filename = f"output_{str(i).zfill(3)}.png"
 
-    cv2.imwrite(OUTPUT_PATH + f"\{filename}", imgs[i])
+    # Name the image and label mask
+    img_filename = f"output_{str(i).zfill(3)}.png"
+    label_filename = f"label_{str(i).zfill(3)}.png"
 
+    cv2.imwrite(IMG_OUTPUT_PATH + f"\{img_filename}", imgs[i])
+    cv2.imwrite(LABELS_OUTPUT_PATH + f"\{img_filename}", masks[i])
+    
     head.move(0.06)
     median = head
     j = 0

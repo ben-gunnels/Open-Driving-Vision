@@ -48,8 +48,6 @@ class Median(RoadObject):
         self.start_y += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin", mode="deg")
         if self.prev:
             self.pre_gap = self.prev.post_gap
-
-        
         self._calculate_median()
 
 

@@ -1,9 +1,9 @@
 import cv2
 import os
-from .const.constants import FRAME_RATE, OUTPUT_PATH, VIDEO_OUTPUT_PATH
+from .const.constants import FRAME_RATE, IMG_OUTPUT_PATH, VIDEO_OUTPUT_PATH
 
 # Image folder path
-image_folder = OUTPUT_PATH
+image_folder = IMG_OUTPUT_PATH
 
 
 def video_playback(name):
