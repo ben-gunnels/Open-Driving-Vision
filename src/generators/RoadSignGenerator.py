@@ -28,7 +28,7 @@ class RoadSignGenerator:
         self.builder = Builder(center, bounds)
 
 
-    def generate_roadsign(self, roadsign_name: str):
+    def generate_roadsign(self, roadsign_name: str, side: str):
         """
 
             Builds a roadsign by randomly placing its origin and drawing its initial shape on the horizon.
@@ -36,10 +36,10 @@ class RoadSignGenerator:
         """
         roadsign_params = self.builder.builds[roadsign_name].copy()
         
-        if (random.random() < LEFT_PLACEMENT_PROB):
+        if (side == "left"):
             # left means that its anchored to the left road line
             initial_placement = ("left", left_line_placement_generator.randomize_placement())
-        else:
+        elif (side == "right"):
             # right means that its anchored to the right road line
             initial_placement = ("right", right_line_placement_generator.randomize_placement())
         

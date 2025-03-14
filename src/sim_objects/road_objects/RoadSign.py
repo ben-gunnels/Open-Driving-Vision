@@ -31,7 +31,7 @@ class RoadSign(RoadObject):
             Saves the main shape as a mask
             Params: img (np array)
         """
-        valid = any(self._check_valid_display(pt.x, pt.y) for pt in self.sign_points) or any(self._check_valid_display(pt.x, pt.y) for pt in self.pole_points)
+        valid = self.validate()
 
         if not valid:
             return
@@ -49,6 +49,14 @@ class RoadSign(RoadObject):
             cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.primary_color)  # Fill with red
             self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value)  # Fill with red
 
+    def validate(self):
+        """ 
+            Returns whether the object is in view within the frame. 
+        """
+        return (
+                any(self._check_valid_display(pt.x, pt.y) for pt in self.sign_points) 
+                or any(self._check_valid_display(pt.x, pt.y) for pt in self.pole_points)
+        )
 
     def _initialize_sign_points(self, points):
         """

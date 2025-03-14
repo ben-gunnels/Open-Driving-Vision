@@ -25,6 +25,19 @@ class RoadObject:
         """
         return np.sqrt(sideA * sideA + sideB * sideB)
     
+    def _find_hyp_side_angle(self, side, angle, func: str = "sin", mode="rad"):
+        """
+            Find the hypotenuse given a side and an angle.
+        """
+        if mode == "deg":
+            angle = angle * (np.pi / 180)
+        
+        if func == "sin":
+            return side / np.sin(angle)
+        
+        elif func == "cos":
+            return side / np.cos(angle)
+    
     def _check_valid_display(self, x, y):
         """
             Bounds are (left_x, top_y, right_x, bottom_y)

@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 from .RoadObject import RoadObject
-from ..const.constants import (SCREEN_WIDTH, SCREEN_HEIGHT, MEDIAN_LINE_ANGLE, ROAD_LINE_MAX_LENGTH, ROAD_LINE_GAP_MAX_LENGTH)
+from ..const.constants import (SCREEN_WIDTH, SCREEN_HEIGHT, MEDIAN_LINE_ANGLE, MEDIAN_LINE_MAX_LENGTH, MEDIAN_LINE_GAP_MAX_LENGTH)
 
 class Median(RoadObject):
     def __init__(self, *args, **kwargs):
@@ -74,13 +74,13 @@ class Median(RoadObject):
             Takes the straight line from the bottom of the screen to the current starting point as its input. 
         
         """
-        return -0.32 * self._find_hyp(x, y) + ROAD_LINE_MAX_LENGTH
+        return -0.32 * self._find_hyp(x, y) + MEDIAN_LINE_MAX_LENGTH
 
     def _median_gap_length(self, x: float, y: float):
         """
             Finds the current gap lenght for the median
         """
-        return -0.32 * self._find_hyp(x, y) + ROAD_LINE_GAP_MAX_LENGTH
+        return -0.32 * self._find_hyp(x, y) + MEDIAN_LINE_GAP_MAX_LENGTH
 
 
 # def main():

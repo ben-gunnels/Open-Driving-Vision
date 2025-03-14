@@ -6,7 +6,7 @@ from .const.constants import FRAME_RATE, IMG_OUTPUT_PATH, VIDEO_OUTPUT_PATH
 image_folder = IMG_OUTPUT_PATH
 
 
-def video_playback(name):
+def video_playback(name: str):
     video_filename = f"{name}.mp4"
     # Get image files sorted by name
     images = [img for img in os.listdir(image_folder) if img.endswith(".png")]

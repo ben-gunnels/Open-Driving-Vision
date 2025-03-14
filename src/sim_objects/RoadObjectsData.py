@@ -7,7 +7,7 @@ from ..const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT,LEFT_
 colors = Colors()
 
 ROAD_LINES = {
-    "left" : {
+    "left" : { # Defines the left white road line
                     "geo": np.array([
                         (0, SCREEN_HEIGHT * LEFT_ROAD_LINE_START_HEIGHT1),   # Wide start
                         (0, SCREEN_HEIGHT * LEFT_ROAD_LINE_START_HEIGHT2),  # Narrow end
@@ -15,7 +15,7 @@ ROAD_LINES = {
                     ], np.int32),
                     "color": colors.white
                 },
-    "right" :  {
+    "right" :  { # Defines the right white road line
                     "geo": np.array([
                         (SCREEN_WIDTH * RIGHT_ROAD_LINE_START_WIDTH1, SCREEN_HEIGHT),   # Wide start
                         (SCREEN_WIDTH * RIGHT_ROAD_LINE_START_WIDTH2, SCREEN_HEIGHT),  # Narrow end
@@ -23,7 +23,7 @@ ROAD_LINES = {
                     ], np.int32),
                     "color": colors.white
                 },
-    "left_grass": { # Fills in the horizon with grass
+    "left_grass": { # Define the grass fill from the road to the horizon
                     "geo": np.array([
                         (0, SCREEN_HEIGHT * LEFT_ROAD_LINE_START_HEIGHT1),
                         (0, SCREEN_HEIGHT * HORIZON_HEIGHT),
@@ -32,7 +32,7 @@ ROAD_LINES = {
                     "color": colors.grass_green
                   },
 
-    "right_grass": { # Fills in the horizon with grass
+    "right_grass": { # Define the grass fill from the road to the horizon
                     "geo": np.array([
                         (SCREEN_WIDTH *  RIGHT_ROAD_LINE_START_WIDTH2, SCREEN_HEIGHT),
                         (SCREEN_WIDTH, SCREEN_HEIGHT),
@@ -42,3 +42,13 @@ ROAD_LINES = {
                     "color": colors.grass_green
                   }
 }
+
+ROAD_OBJECTS = ["diamond_warning_sign", 
+              "speed_limit_sign", 
+              "stop_sign", 
+              "small_informational_sign", 
+              "large_informational_sign",
+              "yield_sign",
+              "freeway_sign",
+              "traffic_cone"
+              ]
