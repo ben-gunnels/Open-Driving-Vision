@@ -33,3 +33,7 @@ Videos are generated in the root directory.
 ### ✔️ Easily configurable driving vision system✔️ Modular & extensible architecture✔️ Open-source and community-driven
 
 ### 🚀 Start experimenting today!
+
+### Interacting with this Application
+The StreamSimulator class simulates a continuous drive by streaming objects from the horizon to the front of the frame. This can be used to test a model on a continuous driving experience.
+The RandomSimulator class creates screens with random objects in random locations. This can be used for getting a diverse set of training and testing data. 
