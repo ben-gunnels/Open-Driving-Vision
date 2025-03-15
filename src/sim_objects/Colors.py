@@ -18,3 +18,6 @@ class Colors:
     # Custom Colors
     grass_green = (21, 109, 19)   # Dark green, resembles grass
     wood_brown  = (19, 69, 139)   # Brownish tone, resembles wood
+    sand = (128, 178, 194) # Goldish sand color, resembles sand
+    rock = (65, 77, 90) # Dark brownish grey color resembling rock
+    clay = (80, 106, 182) # Reddish brown color resembling Earthen clay

@@ -43,7 +43,7 @@ OBJECT_PLACEMENT_PROB = 0.01 # The probability of placing a road object on any g
 DEBUG = False  # Enable/disable debug mode
 
 # Output Paths
-LOG_PATH = "./src/outputs/logs"
+LOG_PATH = "./src/logs"
 IMG_OUTPUT_PATH = "./src/outputs/images"
 LABELS_OUTPUT_PATH = "./src/outputs/labels"
-VIDEO_OUTPUT_PATH = "./src/test"
+VIDEO_OUTPUT_PATH = "./src/outputs/video"

@@ -17,7 +17,7 @@ class Builder():
                     "name": "diamond_warning_sign",
                     "primary_color": colors.yellow,
                     "secondary_color": colors.wood_brown,
-                    "label_value": 200
+                    "label_value": (200, 201)
                 }
             },
             "speed_limit_sign": {
@@ -26,7 +26,7 @@ class Builder():
                     "name": "speed_limit_sign",
                     "primary_color": colors.white,
                     "secondary_color": colors.silver,
-                    "label_value": 202
+                    "label_value": (202, 203)
                 }
             },
             "stop_sign": {
@@ -35,7 +35,7 @@ class Builder():
                     "name": "stop_sign",
                     "primary_color": colors.red,
                     "secondary_color": colors.wood_brown,
-                    "label_value": 203
+                    "label_value": (204, 205)
                 }
             },
             "small_informational_sign": {
@@ -44,7 +44,7 @@ class Builder():
                     "name": "small_informational_sign",
                     "primary_color": colors.green,
                     "secondary_color": colors.silver,
-                    "label_value": 204
+                    "label_value": (206, 207)
                 }
             },
             "large_informational_sign": {
@@ -53,7 +53,7 @@ class Builder():
                     "name": "large_informational_sign",
                     "primary_color": colors.green,
                     "secondary_color": colors.silver,
-                    "label_value": 205
+                    "label_value": (208, 209)
                 }
             },
             "yield_sign": {
@@ -62,7 +62,7 @@ class Builder():
                     "name": "yield_sign",
                     "primary_color": colors.red,
                     "secondary_color": colors.wood_brown,
-                    "label_value": 206
+                    "label_value": (210, 211)
                 }
             },
             "freeway_sign": {
@@ -71,7 +71,7 @@ class Builder():
                     "name": "freeway_sign",
                     "primary_color": colors.blue,
                     "secondary_color": colors.silver,
-                    "label_value": 207
+                    "label_value": (212, 213)
                 }
             },
             "traffic_cone": {
@@ -80,7 +80,7 @@ class Builder():
                     "name": "traffic_cone",
                     "primary_color": colors.orange,
                     "secondary_color": colors.white,
-                    "label_value": 208
+                    "label_value": (214, 215)
                 }
             },
         }

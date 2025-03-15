@@ -7,7 +7,7 @@ image_folder = IMG_OUTPUT_PATH
 
 
 def video_playback(name: str):
-    video_filename = f"{name}.mp4"
+    video_filename = os.path.join(VIDEO_OUTPUT_PATH, f"{name}.mp4")  # Specify output path
     # Get image files sorted by name
     images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
 

@@ -23,7 +23,7 @@ ROAD_LINES = {
                     ], np.int32),
                     "color": colors.white
                 },
-    "left_grass": { # Define the grass fill from the road to the horizon
+    "left_ground": { # Define the ground fill from the road to the horizon
                     "geo": np.array([
                         (0, SCREEN_HEIGHT * LEFT_ROAD_LINE_START_HEIGHT1),
                         (0, SCREEN_HEIGHT * HORIZON_HEIGHT),
@@ -32,7 +32,7 @@ ROAD_LINES = {
                     "color": colors.grass_green
                   },
 
-    "right_grass": { # Define the grass fill from the road to the horizon
+    "right_ground": { # Define the ground fill from the road to the horizon
                     "geo": np.array([
                         (SCREEN_WIDTH *  RIGHT_ROAD_LINE_START_WIDTH2, SCREEN_HEIGHT),
                         (SCREEN_WIDTH, SCREEN_HEIGHT),

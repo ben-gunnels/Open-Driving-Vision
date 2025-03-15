@@ -39,7 +39,7 @@ class RoadSign(RoadObject):
         if self.reverse_sign:
             primary_col = colors.silver if self.name != "traffic_cone" else self.primary_color
             cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], primary_col)  # Fill with red
-            self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value)  # Fill with red
+            self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value[1])  # Fill with label for backward
 
             if self.name != "traffic_cone":
                 cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
@@ -47,7 +47,7 @@ class RoadSign(RoadObject):
             if self.name != "traffic_cone":
                 cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
             cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.primary_color)  # Fill with red
-            self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value)  # Fill with red
+            self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value[0])  # Fill with label for forward
 
     def validate(self):
         """ 

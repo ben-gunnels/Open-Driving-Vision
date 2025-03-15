@@ -12,7 +12,7 @@ from ..generators.RoadSignGenerator import RoadSignGenerator
 from ..video_playback import video_playback
 from ..const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT, CENTER, BOUNDS, MEDIAN_LINES_PER_FRAME,
                                MEDIAN_LINE_GAP_MAX_LENGTH, MEDIAN_X_START, 
-                               DEBUG, DURATION, MAX_CHAOS, LOG_PATH, IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH
+                               DEBUG, DURATION, MAX_CHAOS, LOG_PATH, IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH, VIDEO_OUTPUT_PATH
                                )
 # Holds BGR color values
 colors = Colors()
@@ -24,7 +24,8 @@ class Simulator(ABC):
         moving_speed: float = 0.1, # Default speed
         frame_rate: int = 10,      # Default FPS
         chaos: int = 5,            # Default chaos level
-        sim_name: str = "test"
+        sim_name: str = "test",
+        terrain: str = "grass"
     ):
         """
             Initializes the parent simulator class.
@@ -56,6 +57,7 @@ class Simulator(ABC):
         self.roadsign_generator = RoadSignGenerator(CENTER, BOUNDS)
         self.road_object_names = ROAD_OBJECTS
         self.road_objects = deque([])
+        self._initialize_terrain(terrain)
         self._initialize_frames()
         self._initialize_labels()
         self._initialize_median()
@@ -73,10 +75,11 @@ class Simulator(ABC):
 
         # Ensure the paths exist before trying to remove them
         # Set up the image output directory and the labels output directory
-        for path in [IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH]:
+        for path in [IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH]: # Don't remove the videos directory
             if os.path.exists(path):
                 shutil.rmtree(path)  # Properly removes directories
-
+        
+        for path in [IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH, VIDEO_OUTPUT_PATH]:
             os.makedirs(path, exist_ok=True)  # Creates directory safely
 
         # Configure logging
@@ -111,6 +114,21 @@ class Simulator(ABC):
         elif message_type == "error":
             logging.error(message)
 
+    def _initialize_terrain(self, terrain):
+        """
+            Sets the terrain color for the space between the road and the horizon. 
+        """
+        terrain_colors = {
+            "grass": colors.grass_green,
+            "sand": colors.sand,
+            "rock": colors.rock,
+            "clay": colors.clay
+        }
+
+        if terrain not in terrain_colors:
+            terrain = "grass"
+        self.terrain = terrain_colors[terrain]
+
     def _initialize_frames(self):
         """
             Initializes the frames as numpy arrays based on the input size.
@@ -120,7 +138,7 @@ class Simulator(ABC):
 
         for frame in self.frames:
             for line in ROAD_LINES:
-                cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], ROAD_LINES[line]["color"])  # Fill with white
+                cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], self.terrain)  # Fill with white
                 if DEBUG:
                     # Draws a circle at the centerpoint of the frame
                     cv2.circle(frame, (int(CENTER[0]), int(CENTER[1])), radius=3, color=colors.red, thickness=1)

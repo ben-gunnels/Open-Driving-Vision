@@ -13,9 +13,18 @@ class RandomizedSimulator(Simulator):
             moving_speed: float, 
             frame_rate: int, 
             chaos: int=2, 
-            sim_name: str="random_test"
+            sim_name: str="random_test",
+            terrain: str = "grass"
         ):
-        super().__init__(number_frames, moving_speed, frame_rate, chaos, sim_name)
+        super().__init__(
+            number_frames=number_frames, 
+            moving_speed=moving_speed, 
+            frame_rate=frame_rate, 
+            chaos=chaos, 
+            sim_name=sim_name, 
+            terrain=terrain
+        )
+
 
     def run(self):
         """
