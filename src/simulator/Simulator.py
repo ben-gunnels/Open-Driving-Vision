@@ -41,7 +41,7 @@ class Simulator(ABC):
             raise ValueError("moving_speed must be greater than zero and less than 1")
         if frame_rate <= 0:
             raise ValueError("frame_rate must be a positive integer.")
-        if chaos < 0 or chaos > 10:
+        if chaos < 0 or chaos > 20:
             raise ValueError("chaos must be between 0 and 10.")
         
         # Simulator values
@@ -93,7 +93,7 @@ class Simulator(ABC):
         pass
 
     def create_video(self):
-        video_playback(self.sim_name)
+        video_playback(self.sim_name, self.frame_rate)
 
     def remove_invalid_objects(self):
         i = 0

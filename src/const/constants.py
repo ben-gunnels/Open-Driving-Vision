@@ -27,10 +27,12 @@ RIGHT_ROAD_LINE_END_WIDTH = 0.50
 PLACEMENT_DEVIATION = 0.06  # Maximum placement deviation
 MINIMUM_PLACEMENT_DEVIATION = 0.03  # Minimum placement deviation
 LEFT_PLACEMENT_PROB = 0.5  # Probability of left-side placement
+SCALE_FACTOR = 0.5
 
 # Pole Properties (Minimum size)
 MINIMUM_POLE_HEIGHT = 20  # px
 MINIMUM_POLE_WIDTH = 2  # px
+SIGN_SCALE = 0.75
 
 # Simulation Settings
 DURATION = 140  # Total duration of the simulation

@@ -1,4 +1,4 @@
-from ..const.constants import (MINIMUM_POLE_HEIGHT, MINIMUM_POLE_WIDTH)
+from ..const.constants import (MINIMUM_POLE_HEIGHT, MINIMUM_POLE_WIDTH, SCALE_FACTOR)
 from ..sim_objects.Colors import Colors
 
 colors = Colors()
@@ -84,6 +84,9 @@ class Builder():
                 }
             },
         }
+    """
+        The following functions build the shape of the roadside objects.
+    """
 
     def build_pole(self, starting_point: tuple):
         """
@@ -92,9 +95,9 @@ class Builder():
         x, y = starting_point
         return (
             (x, y), 
-            (x+MINIMUM_POLE_WIDTH, y), 
-            (x+MINIMUM_POLE_WIDTH, y-MINIMUM_POLE_HEIGHT), 
-            (x, y-MINIMUM_POLE_HEIGHT)
+            (x+MINIMUM_POLE_WIDTH*SCALE_FACTOR, y), 
+            (x+MINIMUM_POLE_WIDTH*SCALE_FACTOR, y-MINIMUM_POLE_HEIGHT*SCALE_FACTOR), 
+            (x, y-MINIMUM_POLE_HEIGHT*SCALE_FACTOR)
         )
 
     
@@ -104,12 +107,12 @@ class Builder():
             1u wide, 1u tall
         """
         x, y = starting_point
-        y += 5
+        y += 5*SCALE_FACTOR
         return (
             (x, y), 
-            (x+5, y-5), 
-            (x, y-10), 
-            (x-5, y-5)
+            (x+5*SCALE_FACTOR, y-5*SCALE_FACTOR), 
+            (x, y-10*SCALE_FACTOR),
+            (x-5*SCALE_FACTOR, y-5*SCALE_FACTOR)
         )
 
     def build_speed_limit_sign(self, starting_point: tuple):
@@ -118,12 +121,12 @@ class Builder():
             1u wide, 1u tall
         """
         x, y = starting_point
-        y += 5
+        y += 5*SCALE_FACTOR
         return (
-            (x+5, y), 
-            (x+5, y-10), 
-            (x-5, y-10), 
-            (x-5, y)
+            (x+5*SCALE_FACTOR, y), 
+            (x+5*SCALE_FACTOR, y-10*SCALE_FACTOR), 
+            (x-5*SCALE_FACTOR, y-10*SCALE_FACTOR), 
+            (x-5*SCALE_FACTOR, y)
         )
     
     def build_stop_sign(self, starting_point: tuple):
@@ -131,16 +134,16 @@ class Builder():
             Builds a stop sign shape from a starting point which is the middle of the top of the sign pole.
         """
         x, y = starting_point
-        y += 5*0.5  # Scale the offset
+        y += 5*SCALE_FACTOR  # Scale the offset
         return (
-            (x + 3 * 0.5, y),
-            (x + 7.2 * 0.5, y - 4.2 * 0.5),
-            (x + 7.2 * 0.5, y - 10.2 * 0.5),
-            (x + 3 * 0.5, y - 14.4 * 0.5),
-            (x - 3 * 0.5, y - 14.4 * 0.5),
-            (x - 7.2 * 0.5, y - 10.2 * 0.5),
-            (x - 7.2 * 0.5, y - 4.2 * 0.5),
-            (x - 3 * 0.5, y)
+            (x + 3 * SCALE_FACTOR, y),
+            (x + 7.2 * SCALE_FACTOR, y - 4.2 * SCALE_FACTOR),
+            (x + 7.2 * SCALE_FACTOR, y - 10.2 * SCALE_FACTOR),
+            (x + 3 * SCALE_FACTOR, y - 14.4 * SCALE_FACTOR),
+            (x - 3 * SCALE_FACTOR, y - 14.4 * SCALE_FACTOR),
+            (x - 7.2 * SCALE_FACTOR, y - 10.2 * SCALE_FACTOR),
+            (x - 7.2 * SCALE_FACTOR, y - 4.2 * SCALE_FACTOR),
+            (x - 3 * SCALE_FACTOR, y)
         )
 
     def build_small_informational_sign(self, starting_point: tuple):
@@ -149,12 +152,12 @@ class Builder():
             0.6u wide, 1u tall
         """
         x, y = starting_point
-        y += 5
+        y += 5*SCALE_FACTOR
         return (
-            (x+3, y), 
-            (x+3, y-10), 
-            (x-3, y-10),
-            (x-3, y)
+            (x+3*SCALE_FACTOR, y), 
+            (x+3*SCALE_FACTOR, y-10*SCALE_FACTOR), 
+            (x-3*SCALE_FACTOR, y-10*SCALE_FACTOR),
+            (x-3*SCALE_FACTOR, y)
         )
     
     def build_large_informational_sign(self, starting_point: tuple):
@@ -165,10 +168,10 @@ class Builder():
         x, y = starting_point
         y += 5
         return (
-            (x+15, y), 
-            (x+15, y-16),
-            (x-15, y-16), 
-            (x-15, y)
+            (x+15*SCALE_FACTOR, y), 
+            (x+15*SCALE_FACTOR, y-16*SCALE_FACTOR),
+            (x-15*SCALE_FACTOR, y-16*SCALE_FACTOR), 
+            (x-15*SCALE_FACTOR, y)
         )
     
     def build_yield_sign(self, starting_point: tuple):
@@ -178,11 +181,11 @@ class Builder():
             Side lengths of 1u
         """
         x, y = starting_point
-        y += 5
+        y += 5*SCALE_FACTOR
         return (
             (x, y), 
-            (x+7, y-7), 
-            (x-7, y-7)
+            (x+3.5*SCALE_FACTOR, y-6.062*SCALE_FACTOR), 
+            (x-3.5*SCALE_FACTOR, y-6.062*SCALE_FACTOR)
         )
     
     def build_freeway_sign(self, starting_point: tuple):
@@ -195,10 +198,10 @@ class Builder():
         y += 5
         return (
             (x, y), 
-            (x+6.5, y-4.7), 
-            (x+1.8, y-11.2), 
-            (x-1.8, y-11.2), 
-            (x-6.5, y-4.7)
+            (x+6.5*SCALE_FACTOR, y-4.7*SCALE_FACTOR), 
+            (x+1.8*SCALE_FACTOR, y-11.2*SCALE_FACTOR), 
+            (x-1.8*SCALE_FACTOR, y-11.2*SCALE_FACTOR), 
+            (x-6.5*SCALE_FACTOR, y-4.7*SCALE_FACTOR)
         )
     
     def build_traffic_cone(self, starting_point: tuple, anchor="left"):
@@ -209,23 +212,23 @@ class Builder():
         if anchor == "right":
             return (
                 (x, y), 
-                (x+6, y), 
-                (x+6, y-1), 
-                (x+5, y-1), 
-                (x+3, y-6), 
-                (x+1, y-1), 
-                (x, y-1)
+                (x+6*SCALE_FACTOR, y), 
+                (x+6*SCALE_FACTOR, y-1*SCALE_FACTOR), 
+                (x+5*SCALE_FACTOR, y-1*SCALE_FACTOR), 
+                (x+3*SCALE_FACTOR, y-6*SCALE_FACTOR), 
+                (x+1*SCALE_FACTOR, y-1*SCALE_FACTOR), 
+                (x, y-1*SCALE_FACTOR)
             )
         
         elif anchor == "left":
             return (
-                (x-6, y), 
+                (x-6*SCALE_FACTOR, y), 
                 (x, y), 
-                (x, y-1), 
-                (x-1, y-1), 
-                (x-3, y-6),
-                (x-5, y-1), 
-                (x-6, y-1)
+                (x, y-1*SCALE_FACTOR), 
+                (x-1*SCALE_FACTOR, y-1*SCALE_FACTOR), 
+                (x-3*SCALE_FACTOR, y-6*SCALE_FACTOR),
+                (x-5*SCALE_FACTOR, y-1*SCALE_FACTOR), 
+                (x-6*SCALE_FACTOR, y-1*SCALE_FACTOR)
             )
     
 

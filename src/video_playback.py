@@ -6,7 +6,7 @@ from .const.constants import FRAME_RATE, IMG_OUTPUT_PATH, VIDEO_OUTPUT_PATH
 image_folder = IMG_OUTPUT_PATH
 
 
-def video_playback(name: str):
+def video_playback(name: str, frame_rate : int=FRAME_RATE):
     video_filename = os.path.join(VIDEO_OUTPUT_PATH, f"{name}.mp4")  # Specify output path
     # Get image files sorted by name
     images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
@@ -17,7 +17,7 @@ def video_playback(name: str):
 
     # Create a video writer
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    video = cv2.VideoWriter(video_filename, fourcc, FRAME_RATE, (width, height))
+    video = cv2.VideoWriter(video_filename, fourcc, frame_rate, (width, height))
 
     # Add images to video
     for image in images:
