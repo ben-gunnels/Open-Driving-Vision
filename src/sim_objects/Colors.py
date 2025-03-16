@@ -21,3 +21,5 @@ class Colors:
     sand = (128, 178, 194) # Goldish sand color, resembles sand
     rock = (65, 77, 90) # Dark brownish grey color resembling rock
     clay = (80, 106, 182) # Reddish brown color resembling Earthen clay
+    yellow_warning = (204, 0, 255) # warning sign color
+    orange_rw = (102, 0, 255) # sign for upcoming road work
