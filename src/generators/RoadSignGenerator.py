@@ -43,7 +43,7 @@ class RoadSignGenerator:
             # right means that its anchored to the right road line
             initial_placement = ("right", right_line_placement_generator.randomize_placement())
         
-        pole = self.builder.build_pole(initial_placement[1])
+        pole = self.builder.build_pole(initial_placement[1]) 
         start_sign_point = self._get_sign_start_point(pole)
 
         # Map the signs to their functions
