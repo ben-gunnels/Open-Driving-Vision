@@ -83,6 +83,43 @@ class Builder():
                     "label_value": (214, 215)
                 }
             },
+            "mile_marker":{
+                "args": [(None, None), (None, None), self.center, self.bounds],
+                "kwargs": {
+                    "name": "mile_marker",
+                    "primary_color": colors.green,
+                    "secondary_color": colors.silver,
+                    "label_value": (216, 217)
+                }
+            },
+            "road_work_sign":{
+                "args": [(None, None), (None, None), self.center, self.bounds],
+                "kwargs": {
+                    "name": "road_work_sign",
+                    "primary_color": colors.orange,
+                    "secondary_color": colors.silver,
+                    "label_value": (218, 219)
+                }
+            },
+            "tourist_help_sign":{
+                "args": [(None, None), (None, None), self.center, self.bounds],
+                "kwargs": {
+                    "name": "tourist_help_sign",
+                    "primary_color": colors.info_brown,
+                    "secondary_color": colors.silver,
+                    "label_value": (220, 221)
+                }
+            },
+            "info_sign":{
+                "args": [(None, None), (None, None), self.center, self.bounds],
+                "kwargs": {
+                    "name": "info_sign",
+                    "primary_color": colors.blue,
+                    "secondary_color": colors.silver,
+                    "label_value": (221, 222)
+                }
+            },
+            
         }
     """
         The following functions build the shape of the roadside objects.
@@ -99,8 +136,68 @@ class Builder():
             (x+MINIMUM_POLE_WIDTH*SCALE_FACTOR, y-MINIMUM_POLE_HEIGHT*SCALE_FACTOR), 
             (x, y-MINIMUM_POLE_HEIGHT*SCALE_FACTOR)
         )
-
+    def build_small_pole(self, starting_point: tuple):
+        """
+        This is the pole my gf rides on
+        """
+        x,y = starting_point
+        return (
+            (x, y),
+            (x+MINIMUM_POLE_WIDTH*SCALE_FACTOR, y),
+            (x+MINIMUM_POLE_WIDTH*SCALE_FACTOR, y-MINIMUM_POLE_HEIGHT*SCALE_FACTOR*.5), 
+            (x, y-MINIMUM_POLE_HEIGHT*SCALE_FACTOR*.5)
+        )
     
+    def build_mile_marker(self, starting_point: tuple):
+        """
+        this some shit
+        """
+        x,y = starting_point
+        y += 5*SCALE_FACTOR
+        return (
+            (x+1*SCALE_FACTOR, y), 
+            (x+1*SCALE_FACTOR, y-8*SCALE_FACTOR), 
+            (x-1*SCALE_FACTOR, y-8*SCALE_FACTOR),
+            (x-1*SCALE_FACTOR, y)
+        )
+    def build_tourist_help_sign(self, starting_point: tuple):
+        """
+        this for the bitches
+        """
+        x, y = starting_point
+        y += 5*SCALE_FACTOR
+        return (
+            (x+15*SCALE_FACTOR, y), 
+            (x+15*SCALE_FACTOR, y-16*SCALE_FACTOR),
+            (x-15*SCALE_FACTOR, y-16*SCALE_FACTOR), 
+            (x-15*SCALE_FACTOR, y)
+        )  
+    def build_info_sign(self, starting_point: tuple):
+        """
+        what's for dinner
+        """
+        x, y = starting_point
+        y += 5*SCALE_FACTOR
+        return (
+            (x+15*SCALE_FACTOR, y), 
+            (x+15*SCALE_FACTOR, y-16*SCALE_FACTOR),
+            (x-15*SCALE_FACTOR, y-16*SCALE_FACTOR), 
+            (x-15*SCALE_FACTOR, y)
+        )
+    def build_road_work_sign(self, starting_point: tuple):
+        """
+        OH fuck there is road work. I'm gonna be late. I should grab Starbucks
+        """
+        x, y = starting_point
+        y += 5*SCALE_FACTOR
+        return (
+            (x, y), 
+            (x+5*SCALE_FACTOR, y-5*SCALE_FACTOR), 
+            (x, y-10*SCALE_FACTOR),
+            (x-5*SCALE_FACTOR, y-5*SCALE_FACTOR)
+        )
+
+        
     def build_diamond_sign(self, starting_point: tuple):
         """
             Builds a diamond sign shape from a starting point which is the middle of the top of the sign pole.
@@ -166,7 +263,7 @@ class Builder():
             3u wide, 1.6u high
         """
         x, y = starting_point
-        y += 5
+        y += 5*SCALE_FACTOR
         return (
             (x+15*SCALE_FACTOR, y), 
             (x+15*SCALE_FACTOR, y-16*SCALE_FACTOR),

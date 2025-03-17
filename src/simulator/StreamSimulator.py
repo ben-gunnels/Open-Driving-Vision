@@ -27,7 +27,7 @@ class StreamSimulator(Simulator):
         # Initialize the last frame that an object was placed
         self.recent_left_object = -REFRACTORY - 1
         self.recent_right_object = -REFRACTORY - 1 
-
+   
     def run(self):
         """
             Runs the simulation for the duration specified.
@@ -40,6 +40,11 @@ class StreamSimulator(Simulator):
             
             if self._place_object(i, "right"):
                 self.recent_right_object = i
+            
+            if i %80 == 0:
+                self._place_object(i,"right", True)
+                self._place_object(i,"left",True)
+                
 
             # Animate and move the objects
             self._animate_road_objects(i)
@@ -92,13 +97,16 @@ class StreamSimulator(Simulator):
         self.median_head = find_new_head(self.median_head)
 
 
-    def _place_object(self, itr: int, side: str):
+    def _place_object(self, itr: int, side: str, place_mile_marker: bool= False):
         """
             Places a randomized object with chaos * OBJECT_PLACEMENT_PROB.
             Must allow for a refractory period to pass before an object is placed again
             on either the left side of the road or the right side. 
         """
         recent = self.recent_left_object if side == "left" else self.recent_right_object
+        if place_mile_marker:
+            self.road_objects.append(self.roadsign_generator.generate_roadsign("mile_marker", side))
+            return
         if (itr - recent < REFRACTORY):
             return False
         if random.random() < self.chaos * OBJECT_PLACEMENT_PROB:

@@ -22,6 +22,6 @@ class Colors:
     rock = (65, 77, 90) # Dark brownish grey color resembling rock
     clay = (80, 106, 182) # Reddish brown color resembling Earthen clay
     orange_rw = (102, 0, 255) # sign for upcoming road work
-    info_blue = (72, 115, 0) # sign for motorist information
+    #info_blue = (255, 0, 0) # sign for motorist information
     info_brown = (0, 0, 102) #sign for state parks (?)
     
