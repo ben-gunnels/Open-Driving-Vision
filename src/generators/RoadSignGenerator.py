@@ -38,13 +38,18 @@ class RoadSignGenerator:
         
         if (side == "left"):
             # left means that its anchored to the left road line
-            initial_placement = ("left", left_line_placement_generator.randomize_placement())
+            initial_placement = (side, left_line_placement_generator.randomize_placement())
+            if roadsign_name == "mile_marker":
+                initial_placement = (side, left_line_placement_generator.randomize_placement(fixed = True))
         elif (side == "right"):
             # right means that its anchored to the right road line
             initial_placement = ("right", right_line_placement_generator.randomize_placement())
+            if roadsign_name == "mile_marker":
+                initial_placement = (side, right_line_placement_generator.randomize_placement(fixed = True))
         
         pole = self.builder.build_pole(initial_placement[1]) 
         start_sign_point = self._get_sign_start_point(pole)
+        
 
         # Map the signs to their functions
         funcs = {
@@ -55,7 +60,11 @@ class RoadSignGenerator:
             "large_informational_sign": self.builder.build_large_informational_sign(start_sign_point),
             "yield_sign": self.builder.build_yield_sign(start_sign_point),
             "freeway_sign": self.builder.build_freeway_sign(start_sign_point),
-            "traffic_cone": self.builder.build_traffic_cone(initial_placement[1], initial_placement[0])
+            "tourist_help_sign": self.builder.build_tourist_help_sign(start_sign_point),
+            "info_sign": self.builder.build_info_sign(start_sign_point),
+            "road_work_sign": self.builder.build_road_work_sign(start_sign_point),
+            "traffic_cone": self.builder.build_traffic_cone(initial_placement[1], initial_placement[0]),
+            "mile_marker": self.builder.build_mile_marker(start_sign_point)
         }
 
         main_shape = funcs[roadsign_name]

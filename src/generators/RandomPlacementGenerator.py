@@ -20,10 +20,12 @@ class RandomPlacementGenerator:
         self.anchor = anchor
         self.deviation = deviation
 
-    def randomize_placement(self):
+    def randomize_placement(self, fixed:bool = False):
         delta_x = self.right_edge - self.left_edge
         dev = max(delta_x * (random.random() % self.deviation), MINIMUM_PLACEMENT_DEVIATION)
-        
+        if fixed:
+            dev = 0.02
+            
         if self.anchor == "top_left":
             # Placement is set relative to the leftmost top point
             return (self.left_edge + dev, self.top_edge)
