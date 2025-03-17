@@ -50,5 +50,8 @@ ROAD_OBJECTS = ["diamond_warning_sign",
               "large_informational_sign",
               "yield_sign",
               "freeway_sign",
-              "traffic_cone"
+              "traffic_cone",
+              "road_work_sign",
+              "tourist_help_sign",
+              "info_sign"
               ]
