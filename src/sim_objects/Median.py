@@ -43,7 +43,7 @@ class Median(RoadObject):
                 rate - The percentage of the pregap that should be covered in a move. 
                 forward - specifies the direction the car is perceived to be moving.
         """
-        move_length = max(rate * self.pre_gap, 1) # Make it necessary to move 1 pixel
+        move_length = max(rate * self._find_hyp(self.end_x - self.start_x, self.end_y - self.start_y), 1) # Make it necessary to move 1 pixel
         self.start_x -= self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="cos", mode="deg")
         self.start_y += self._find_side_length(MEDIAN_LINE_ANGLE, move_length, func="sin", mode="deg")
         if self.prev:

@@ -26,4 +26,4 @@ def video_playback(name: str, frame_rate : int=FRAME_RATE):
         video.write(frame)
 
     video.release()
-    cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()

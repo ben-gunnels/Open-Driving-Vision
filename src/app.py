@@ -1,10 +1,10 @@
 from .simulator.StreamSimulator import StreamSimulator
 from .simulator.RandomizedSimulator import RandomizedSimulator
 
-number_frames = 240
+number_frames = 360
 moving_speed = 0.04
 frame_rate = 14
-chaos = 20
+chaos = 2
 sim_name = f"stream_chaos{chaos}"
 
 

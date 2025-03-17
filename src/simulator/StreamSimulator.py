@@ -85,7 +85,7 @@ class StreamSimulator(Simulator):
         """
             Moves the medians along their trajectory. 
         """
-        self.median_head.move(self.moving_speed * 2)
+        self.median_head.move(self.moving_speed * 3)
         median = self.median_head
         j = 0
         for i in range(self.number_medians):
