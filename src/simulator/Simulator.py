@@ -12,7 +12,7 @@ from ..generators.RoadSignGenerator import RoadSignGenerator
 from ..video_playback import video_playback
 from ..const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT, CENTER, BOUNDS, MEDIAN_LINES_PER_FRAME,
                                MEDIAN_LINE_GAP_MAX_LENGTH, MEDIAN_X_START, 
-                               DEBUG, DURATION, MAX_CHAOS, LOG_PATH, IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH, VIDEO_OUTPUT_PATH
+                               DEBUG, DURATION, MAX_CHAOS, LOG_PATH, IMG_OUTPUT_PATH, MASKS_OUTPUT_PATH, VIDEO_OUTPUT_PATH
                                )
 # Holds BGR color values
 colors = Colors()
@@ -65,7 +65,7 @@ class Simulator(ABC):
         # Output paths 
         self.log_path = LOG_PATH
         self.img_output_path = IMG_OUTPUT_PATH
-        self.labels_output_path = LABELS_OUTPUT_PATH
+        self.mask_output_path = MASKS_OUTPUT_PATH
 
         if not os.path.exists(LOG_PATH):
             os.mkdir(LOG_PATH) # Sets up the logging directory
@@ -75,11 +75,11 @@ class Simulator(ABC):
 
         # Ensure the paths exist before trying to remove them
         # Set up the image output directory and the labels output directory
-        for path in [IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH]: # Don't remove the videos directory
+        for path in [IMG_OUTPUT_PATH, MASKS_OUTPUT_PATH]: # Don't remove the videos directory
             if os.path.exists(path):
                 shutil.rmtree(path)  # Properly removes directories
         
-        for path in [IMG_OUTPUT_PATH, LABELS_OUTPUT_PATH, VIDEO_OUTPUT_PATH]:
+        for path in [IMG_OUTPUT_PATH, MASKS_OUTPUT_PATH, VIDEO_OUTPUT_PATH]:
             os.makedirs(path, exist_ok=True)  # Creates directory safely
 
         # Configure logging

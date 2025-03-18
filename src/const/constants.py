@@ -47,5 +47,5 @@ DEBUG = False  # Enable/disable debug mode
 # Output Paths
 LOG_PATH = "./src/logs"
 IMG_OUTPUT_PATH = "./src/outputs/images"
-LABELS_OUTPUT_PATH = "./src/outputs/labels"
+MASKS_OUTPUT_PATH = "./src/outputs/masks"
 VIDEO_OUTPUT_PATH = "./src/outputs/video"
