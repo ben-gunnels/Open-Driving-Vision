@@ -27,7 +27,7 @@ RIGHT_ROAD_LINE_END_WIDTH = 0.50
 PLACEMENT_DEVIATION = 0.06  # Maximum placement deviation
 MINIMUM_PLACEMENT_DEVIATION = 0.03  # Minimum placement deviation
 LEFT_PLACEMENT_PROB = 0.5  # Probability of left-side placement
-SCALE_FACTOR = 0.5
+SCALE_FACTOR = 0.45
 
 # Pole Properties (Minimum size)
 MINIMUM_POLE_HEIGHT = 20  # px

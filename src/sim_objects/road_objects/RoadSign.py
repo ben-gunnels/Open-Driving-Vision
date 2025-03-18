@@ -11,12 +11,16 @@ class RoadSign(RoadObject):
         super().__init__(kwargs.get("name", "generic_sign"), center, bounds)
         self.sign_points = []
         self.pole_points = []
-        self._initialize_sign_points(sign) # Initialize each of the Points as a point object for a sign
-        self._initialize_pole_points(pole) # For the pole attached to the sign
+        self.pole2_points = []
+        # Set the attributes for the class
         self.primary_color = kwargs.get("primary_color", colors.red)
         self.secondary_color = kwargs.get("secondary_color", colors.wood_brown)
         self.reverse_sign = kwargs.get("reverse_sign", False)
         self.label_value = kwargs.get("label_value", 255)
+        self.pole_type = kwargs.get("pole_type", "normal")
+
+        self._initialize_sign_points(sign) # Initialize each of the Points as a point object for a sign
+        self._initialize_pole_points(pole) # For the pole attached to the sign
 
     def move(self, rate: float):
         for pt in self.sign_points:
@@ -24,6 +28,10 @@ class RoadSign(RoadObject):
         
         for pt in self.pole_points:
             pt.move(rate)
+
+        if self.pole_type == "double":
+            for pt in self.pole2_points:
+                pt.move(rate)
     
     def draw(self, img, mask_img):
         """
@@ -43,9 +51,13 @@ class RoadSign(RoadObject):
 
             if self.name != "traffic_cone":
                 cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
+                if self.pole_type == "double":
+                    cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole2_points], dtype=np.int32)], self.secondary_color)
         else:
             if self.name != "traffic_cone":
                 cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
+                if self.pole_type == "double":
+                    cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole2_points], dtype=np.int32)], self.secondary_color)
             cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.primary_color)  # Fill with red
             self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value[0])  # Fill with label for forward
 
@@ -69,9 +81,14 @@ class RoadSign(RoadObject):
     def _initialize_pole_points(self, points):
         """
             Create a point object for each point located on the corners of a rectangular pole that holds the road sign. 
+            Distinguish between signs with one pole and two poles
         """
-        for point in points:
-            self.pole_points.append(Point(point[0], point[1], "point", self.center, self.bounds))
+        if self.pole_type == "double": # There are 2 poles
+            self.pole_points = [Point(pt[0], pt[1], "point", self.center, self.bounds) for pt in points[0]]
+            self.pole2_points = [Point(pt[0], pt[1], "point", self.center, self.bounds) for pt in points[1]]
+        else:
+            self.pole_points = [Point(pt[0], pt[1], "point", self.center, self.bounds) for pt in points]
+        
 
     
 

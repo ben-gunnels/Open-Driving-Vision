@@ -46,11 +46,10 @@ class RoadSignGenerator:
             initial_placement = ("right", right_line_placement_generator.randomize_placement())
             if roadsign_name == "mile_marker":
                 initial_placement = (side, right_line_placement_generator.randomize_placement(fixed = True))
-        
-        pole = self.builder.build_pole(initial_placement[1]) if roadsign_name != "mile_marker" else self.builder.build_small_pole(initial_placement[1])  
-        start_sign_point = self._get_sign_start_point(pole)
-        
 
+        pole = self.builder.build_pole(initial_placement[1], roadsign_params["kwargs"]["pole_type"], anchor=initial_placement[0]) 
+        start_sign_point = self._get_sign_start_point(pole, roadsign_params["kwargs"]["pole_type"])
+        ["kwargs"]
         # Map the signs to their functions
         funcs = {
             "diamond_warning_sign": self.builder.build_diamond_sign(start_sign_point),
@@ -72,13 +71,16 @@ class RoadSignGenerator:
         roadsign_params["args"][0] = main_shape
         roadsign_params["args"][1] = pole
         roadsign_params["args"] = tuple(roadsign_params["args"])
-
+    
         roadsign_params["kwargs"]["reverse_sign"] = initial_placement[0] == "left"
             
         return RoadSign(*roadsign_params["args"], **roadsign_params["kwargs"])
         
-    def _get_sign_start_point(self, pole):
-        return ((pole[2][0] + pole[3][0]) / 2, pole[2][1])
+    def _get_sign_start_point(self, pole, sign_type="normal"):
+        if sign_type == "double":
+            return ((pole[0][1][0] + pole[1][1][0]) / 2, pole[0][2][1])
+        else:
+            return ((pole[2][0] + pole[3][0]) / 2, pole[2][1])
 
 
     
