@@ -46,7 +46,7 @@ class RandomizedSimulator(Simulator):
             label_filename = f"label_{str(i).zfill(3)}.png"
 
             cv2.imwrite(self.img_output_path + f"\{img_filename}", self.frames[i])
-            cv2.imwrite(self.labels_output_path + f"\{label_filename}", self.labels[i])
+            cv2.imwrite(self.mask_output_path + f"\{label_filename}", self.labels[i])
 
         # After frames have been created, make a timelapse video of them
         self.create_video()

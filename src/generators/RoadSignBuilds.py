@@ -17,7 +17,7 @@ class Builder():
                     "name": "diamond_warning_sign",
                     "primary_color": colors.yellow,
                     "secondary_color": colors.wood_brown,
-                    "label_value": (200, 201),
+                    "label_value": (1, 2),
                     "pole_type": "normal"
                 }
             },
@@ -27,7 +27,7 @@ class Builder():
                     "name": "speed_limit_sign",
                     "primary_color": colors.white,
                     "secondary_color": colors.silver,
-                    "label_value": (202, 203),
+                    "label_value": (3, 4),
                     "pole_type": "normal"
                 }
             },
@@ -37,7 +37,7 @@ class Builder():
                     "name": "stop_sign",
                     "primary_color": colors.red,
                     "secondary_color": colors.wood_brown,
-                    "label_value": (204, 205),
+                    "label_value": (5, 6),
                     "pole_type": "normal"
                 }
             },
@@ -47,7 +47,7 @@ class Builder():
                     "name": "small_informational_sign",
                     "primary_color": colors.green,
                     "secondary_color": colors.silver,
-                    "label_value": (206, 207),
+                    "label_value": (7, 8),
                     "pole_type": "normal"
                 }
             },
@@ -57,7 +57,7 @@ class Builder():
                     "name": "large_informational_sign",
                     "primary_color": colors.green,
                     "secondary_color": colors.silver,
-                    "label_value": (208, 209),
+                    "label_value": (9, 10),
                     "pole_type": "double"
                 }
             },
@@ -67,7 +67,7 @@ class Builder():
                     "name": "yield_sign",
                     "primary_color": colors.red,
                     "secondary_color": colors.wood_brown,
-                    "label_value": (210, 211),
+                    "label_value": (11, 12),
                     "pole_type": "normal"
                 }
             },
@@ -77,7 +77,7 @@ class Builder():
                     "name": "freeway_sign",
                     "primary_color": colors.blue,
                     "secondary_color": colors.silver,
-                    "label_value": (212, 213),
+                    "label_value": (13, 14),
                     "pole_type": "normal"
                 }
             },
@@ -87,7 +87,7 @@ class Builder():
                     "name": "traffic_cone",
                     "primary_color": colors.orange,
                     "secondary_color": colors.white,
-                    "label_value": (214, 215),
+                    "label_value": (15, 16),
                     "pole_type": "normal"
                 }
             },
@@ -97,7 +97,7 @@ class Builder():
                     "name": "mile_marker",
                     "primary_color": colors.green,
                     "secondary_color": colors.silver,
-                    "label_value": (216, 217),
+                    "label_value": (17, 18),
                     "pole_type": "short"
                 }
             },
@@ -107,7 +107,7 @@ class Builder():
                     "name": "road_work_sign",
                     "primary_color": colors.orange,
                     "secondary_color": colors.silver,
-                    "label_value": (218, 219),
+                    "label_value": (19, 20),
                     "pole_type": "normal"
                 }
             },
@@ -117,7 +117,7 @@ class Builder():
                     "name": "tourist_help_sign",
                     "primary_color": colors.info_brown,
                     "secondary_color": colors.silver,
-                    "label_value": (220, 221),
+                    "label_value": (21, 22),
                     "pole_type": "double"
                 }
             },
@@ -127,7 +127,7 @@ class Builder():
                     "name": "info_sign",
                     "primary_color": colors.blue,
                     "secondary_color": colors.silver,
-                    "label_value": (221, 222),
+                    "label_value": (23, 24),
                     "pole_type": "normal"
                 }
             },

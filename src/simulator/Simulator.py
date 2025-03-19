@@ -41,8 +41,6 @@ class Simulator(ABC):
             raise ValueError("moving_speed must be greater than zero and less than 1")
         if frame_rate <= 0:
             raise ValueError("frame_rate must be a positive integer.")
-        if chaos < 0 or chaos > 20:
-            raise ValueError("chaos must be between 0 and 10.")
         
         # Simulator values
         self.number_frames = int(number_frames)
