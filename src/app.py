@@ -4,7 +4,7 @@ from .simulator.RandomizedSimulator import RandomizedSimulator
 number_frames = 500
 moving_speed = 0.02 # Keep around 0.02
 frame_rate = 15
-chaos = 20 # Set higher for RandomizedSimulator
+chaos = 25 # Set higher for RandomizedSimulator
 sim_name = f"random_chaos_{chaos}"
 
 

@@ -56,7 +56,8 @@ class RandomizedSimulator(Simulator):
             Animates the valid road objects into the frame and the label.
             Road objects queue is reversed as back objects need to be drawn first
         """
-        for r_obj in reversed(self.road_objects): 
+        self._sort_road_objects()
+        for r_obj in self.road_objects: 
             r_obj.draw(self.frames[i], self.labels[i])
 
     def _animate_median(self, i: int):
@@ -123,4 +124,13 @@ class RandomizedSimulator(Simulator):
         current_distance = point.distance
         max_distance = bottom_point._find_hyp_side_angle(bottom_point_y, point.angle, func="sin")
         return abs(max_distance / current_distance)
+    
+
+    def _sort_road_objects(self):
+        """
+            Sorts the road objects by y value. 
+        """
+        self.road_objects = list(self.road_objects)
+
+        self.road_objects.sort(key=lambda x: x.get_distance_from_center())
 

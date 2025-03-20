@@ -69,14 +69,18 @@ class RoadSign(RoadObject):
                 any(self._check_valid_display(pt.x, pt.y) for pt in self.sign_points) 
                 or any(self._check_valid_display(pt.x, pt.y) for pt in self.pole_points)
         )
+    
+    def get_distance_from_center(self):
+        """
+            Return the distance from the bottom of the object to the center of the screen.
+        """    
+        return self.pole_points[0].y
 
     def _initialize_sign_points(self, points):
         """
             Create a point object for each point located on the edge of a road sign.
         """
-        for point in points:
-            self.sign_points.append(Point(point[0], point[1], "point", self.center, self.bounds))
-       
+        self.sign_points = [Point(pt[0], pt[1], "point", self.center, self.bounds) for pt in points]
 
     def _initialize_pole_points(self, points):
         """
