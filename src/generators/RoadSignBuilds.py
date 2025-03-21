@@ -87,7 +87,7 @@ class Builder():
                     "name": "traffic_cone",
                     "primary_color": colors.orange,
                     "secondary_color": colors.white,
-                    "label_value": (15, 16),
+                    "label_value": (15, 16), # Should be changed to just 1 label
                     "pole_type": "normal"
                 }
             },

@@ -1,12 +1,12 @@
 import cv2
 import os
-from .const.constants import FRAME_RATE, IMG_OUTPUT_PATH, VIDEO_OUTPUT_PATH
+from .const.constants import FRAME_RATE, IMG_OUTPUT_PATH, VIDEO_OUTPUT_PATH, IMAGE_SEGMENTATION_PATH
 
 # Image folder path
 image_folder = IMG_OUTPUT_PATH
 
 
-def video_playback(name: str, frame_rate : int=FRAME_RATE):
+def video_playback(name: str, frame_rate: int=FRAME_RATE, image_folder=image_folder):
     video_filename = os.path.join(VIDEO_OUTPUT_PATH, f"{name}.mp4")  # Specify output path
     # Get image files sorted by name
     images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
@@ -27,3 +27,12 @@ def video_playback(name: str, frame_rate : int=FRAME_RATE):
 
     video.release()
     # cv2.destroyAllWindows()
+
+
+def main():
+    image_folder = IMAGE_SEGMENTATION_PATH
+    video_playback("segmented_images", 15, image_folder)
+
+
+if __name__ == "__main__":
+    main()
