@@ -117,6 +117,7 @@ def segment_image(image, mask, i):
   img_filename = f"output_{str(i).zfill(3)}.png"
   cv2.imwrite(f"segmented_images/{img_filename}", image)
 
+#@TODO Fix paths to images in this file
 if Config.TEST_MODE:
   output = 0
   for i, batch in enumerate(dataset):
