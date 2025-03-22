@@ -26,7 +26,7 @@ python -m src.app
 ### 👀🔭🥽 View the Outputs
 Output images are generated in src/outputs/images.
 Labels are generated in src/outputs/labels.
-Videos are generated in the root directory. 
+Videos are generated in src/outputs/videos. 
 
 ### 🎯 Features
 
@@ -35,5 +35,9 @@ Videos are generated in the root directory.
 ### 🚀 Start experimenting today!
 
 ### Interacting with this Application
-The StreamSimulator class simulates a continuous drive by streaming objects from the horizon to the front of the frame. This can be used to test a model on a continuous driving experience.
-The RandomSimulator class creates screens with random objects in random locations. This can be used for getting a diverse set of training and testing data. 
+The StreamSimulator class simulates a continuous drive by streaming objects from the horizon to the front of the frame. This can be used to train and test an image segmentation model on a continuous driving experience.
+The RandomSimulator class creates frames filled with objects in random locations. This can be used for getting a diverse set of training and testing data. 
+
+Play around with the application's parameters and settings to create a one-of-a-kind driving experience. 
+
+Add or edit roadside objects in /src/generators/RoadSignBuilds and /src/generators/RoadSignGenerator to suit your own vision. 
