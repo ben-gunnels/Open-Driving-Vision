@@ -35,5 +35,9 @@ Videos are generated in src/outputs/videos.
 ### 🚀 Start experimenting today!
 
 ### Interacting with this Application
-The StreamSimulator class simulates a continuous drive by streaming objects from the horizon to the front of the frame. This can be used to test a model on a continuous driving experience.
-The RandomSimulator class creates screens with random objects in random locations. This can be used for getting a diverse set of training and testing data. 
+The StreamSimulator class simulates a continuous drive by streaming objects from the horizon to the front of the frame. This can be used to train and test an image segmentation model on a continuous driving experience.
+The RandomSimulator class creates frames filled with objects in random locations. This can be used for getting a diverse set of training and testing data. 
+
+Play around with the applications parameters and settings to create a unique driving experience. 
+
+Add roadside objects in /src/generators/RoadSignBuilds and /src/generators/RoadSignGenerator.
