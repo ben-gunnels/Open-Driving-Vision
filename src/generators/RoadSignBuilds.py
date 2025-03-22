@@ -87,7 +87,7 @@ class Builder():
                     "name": "traffic_cone",
                     "primary_color": colors.orange,
                     "secondary_color": colors.white,
-                    "label_value": (15, 16), # Should be changed to just 1 label
+                    "label_value": (15, 15), # Should be changed to just 1 label
                     "pole_type": "normal"
                 }
             },
@@ -97,7 +97,7 @@ class Builder():
                     "name": "mile_marker",
                     "primary_color": colors.green,
                     "secondary_color": colors.silver,
-                    "label_value": (17, 18),
+                    "label_value": (16, 17),
                     "pole_type": "short"
                 }
             },
@@ -107,7 +107,7 @@ class Builder():
                     "name": "road_work_sign",
                     "primary_color": colors.orange,
                     "secondary_color": colors.silver,
-                    "label_value": (19, 20),
+                    "label_value": (18, 19),
                     "pole_type": "normal"
                 }
             },
@@ -117,7 +117,7 @@ class Builder():
                     "name": "tourist_help_sign",
                     "primary_color": colors.info_brown,
                     "secondary_color": colors.silver,
-                    "label_value": (21, 22),
+                    "label_value": (20, 21),
                     "pole_type": "double"
                 }
             },
@@ -127,7 +127,7 @@ class Builder():
                     "name": "info_sign",
                     "primary_color": colors.blue,
                     "secondary_color": colors.silver,
-                    "label_value": (23, 24),
+                    "label_value": (22, 23),
                     "pole_type": "normal"
                 }
             },

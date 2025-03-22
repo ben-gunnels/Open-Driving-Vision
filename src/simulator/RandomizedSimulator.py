@@ -14,8 +14,10 @@ class RandomizedSimulator(Simulator):
             frame_rate: int, 
             chaos: int=2, 
             sim_name: str="random_test",
-            terrain: str = "grass"
+            terrain: str = "random"
         ):
+        # Randomize the terrain if set to random
+        terrain = random.choice(["grass", "clay", "sand", "rock"]) if terrain == "random" else terrain
         super().__init__(
             number_frames=number_frames, 
             moving_speed=moving_speed, 

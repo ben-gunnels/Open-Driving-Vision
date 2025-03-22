@@ -2,8 +2,8 @@ import tensorflow as tf
 import os
 import numpy as np
 
-IMG_OUTPUT_PATH = "/content/dataset/masks_and_images/images"
-MASKS_OUTPUT_PATH = "/content/dataset/masks_and_images/masks"
+IMG_OUTPUT_PATH = "/content/dataset/images_and_masks/images"
+MASKS_OUTPUT_PATH = "/content/dataset/images_and_masks/masks"
 
 class Augment(tf.keras.layers.Layer):
   def __init__(self, seed=42):
