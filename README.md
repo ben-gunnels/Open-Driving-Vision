@@ -26,7 +26,7 @@ python -m src.app
 ### 👀🔭🥽 View the Outputs
 Output images are generated in src/outputs/images.
 Labels are generated in src/outputs/labels.
-Videos are generated in the root directory. 
+Videos are generated in src/outputs/videos. 
 
 ### 🎯 Features
 
