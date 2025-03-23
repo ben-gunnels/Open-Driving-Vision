@@ -19,7 +19,10 @@ from IPython.display import clear_output
 from .dataset.CreateDataset import CreateTensorflowDataset
 from .UnetModel import Unet
 from .Config import Config
-from ..const.constants import (IMG_OUTPUT_PATH, MASKS_OUTPUT_PATH)
+from ..const.constants import (IMG_OUTPUT_PATH, IMAGE_SEGMENTATION_PATH, SCREEN_HEIGHT, SCREEN_WIDTH, INPUT_SIZE)
+
+
+MODEL_RUN = 5
 
 dataset = CreateTensorflowDataset().get_dataset(test=Config.TEST_MODE)
 
@@ -74,7 +77,7 @@ if not Config.TEST_MODE:
                             steps_per_epoch=Config.STEPS_PER_EPOCH,
                             callbacks=[DisplayCallback()])
   # Save weights
-  model.save_weights("/src/model/weights/modelv2_run_5_weights.weights.h5")  # HDF5
+  model.save_weights(f"/src/model/weights/modelv2_run_{MODEL_RUN}_weights.weights.h5")  # HDF5
   print("Weights saved!")
 
   show_predictions(dataset, 3)
@@ -85,12 +88,10 @@ if Config.TEST_MODE:
     images, masks = batch
     preds.append(model.predict(images))
 
-# Define the scaling factor
-scale_factor = 15  # Example: 2x upscale
 
 def resize_mask(mask):
   # Resize the segmentation mask
-  mask = cv2.resize(mask, None, fx=1216/128, fy=800/128, interpolation=cv2.INTER_NEAREST)
+  mask = cv2.resize(mask, None, fx=SCREEN_WIDTH/INPUT_SIZE, fy=SCREEN_HEIGHT/INPUT_SIZE, interpolation=cv2.INTER_NEAREST)
   return image, mask
 
 def segment_image(image, mask, i):
@@ -115,7 +116,7 @@ def segment_image(image, mask, i):
             cv2.putText(image, f'Class {Config.label_to_name[class_label]}', (x, y - 5),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors[class_label], 2)
   img_filename = f"output_{str(i).zfill(3)}.png"
-  cv2.imwrite(f"segmented_images/{img_filename}", image)
+  cv2.imwrite(f"{IMAGE_SEGMENTATION_PATH}/{img_filename}", image)
 
 #@TODO Fix paths to images in this file
 if Config.TEST_MODE:
@@ -126,17 +127,6 @@ if Config.TEST_MODE:
     for j in range(len(batch_images)):
       image, mask = resize_mask(batch_preds[j])
       img_filename = f"output_{str(output).zfill(3)}.png"
-      image = cv2.imread(f"dataset/images_and_masks/images/{img_filename}")
+      image = cv2.imread(f"{IMG_OUTPUT_PATH}/{img_filename}")
       segment_image(image, mask, output)
       output += 1
-
-
-if Config.TEST_MODE:
-  # Define folder path and output zip file
-  folder_path = "/content/segmented_images"
-  zip_file_path = "/content/segmented_images.zip"
-
-  # Zip the folder
-  shutil.make_archive(zip_file_path.replace('.zip', ''), 'zip', folder_path)
-
-  print(f"Folder zipped successfully: {zip_file_path}")

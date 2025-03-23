@@ -1,9 +1,7 @@
 import tensorflow as tf
 import os
 import numpy as np
-
-IMG_OUTPUT_PATH = "/content/dataset/images_and_masks/images"
-MASKS_OUTPUT_PATH = "/content/dataset/images_and_masks/masks"
+from ....src.const.constants import (IMG_OUTPUT_PATH, MASKS_OUTPUT_PATH, INPUT_SIZE)
 
 class Augment(tf.keras.layers.Layer):
   def __init__(self, seed=42):
@@ -42,13 +40,13 @@ class CreateTensorflowDataset:
         # Load image
         image = tf.io.read_file(image_path)
         image = tf.image.decode_jpeg(image, channels=3)  # Assuming RGB images
-        image = tf.image.resize(image, (128, 128))  # Resize as needed
+        image = tf.image.resize(image, (INPUT_SIZE, INPUT_SIZE))  # Resize as needed
         image = tf.image.convert_image_dtype(image, tf.float32)  # Normalize to [0,1]
 
         # Load mask
         mask = tf.io.read_file(mask_path)
         mask = tf.image.decode_png(mask, channels=1)  # Assuming single-channel mask
-        mask = tf.image.resize(mask, (128, 128))  # Resize as needed
+        mask = tf.image.resize(mask, (INPUT_SIZE, INPUT_SIZE))  # Resize as needed
         mask = tf.image.convert_image_dtype(mask, tf.float32)  # Normalize to [0,1]
 
         return image, mask

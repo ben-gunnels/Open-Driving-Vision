@@ -95,6 +95,9 @@ class RandomizedSimulator(Simulator):
             Must allow for a refractory period to pass before an object is placed again
             on either the left side of the road or the right side. 
         """
+        # Unconditionally add mile markers
+        self._add_mile_markers()
+
         for i in range(self.chaos):
             if random.random() < self.chaos * OBJECT_PLACEMENT_PROB: # Chance to randomly place an object
                 sign = random.choice(self.road_object_names)
@@ -108,6 +111,21 @@ class RandomizedSimulator(Simulator):
                 sign.move(rate * random.random())
 
                 self.road_objects.append(sign)
+
+    def _add_mile_markers(self):
+        """
+            Adds a pair of mile markers in line to the road objects.
+        """
+        left_mile_marker = self.roadsign_generator.generate_roadsign("mile_marker", "left")
+        right_mile_marker = self.roadsign_generator.generate_roadsign("mile_marker", "right")
+        rand_rate = random.random()
+        left_mv = self._calc_move_distance_rate(left_mile_marker.sign_points[0])
+        right_mv = self._calc_move_distance_rate(right_mile_marker.sign_points[0])
+        left_mile_marker.move(left_mv*rand_rate)
+        right_mile_marker.move(right_mv*rand_rate)
+        self.road_objects.append(left_mile_marker)
+        self.road_objects.append(right_mile_marker)
+
 
     def _calc_move_distance_rate(self, point: Point):
         """

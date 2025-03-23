@@ -17,9 +17,9 @@ from .simulator.RandomizedSimulator import RandomizedSimulator
 number_frames = 150
 moving_speed = 0.02 # Keep around 0.02
 frame_rate = 15
-chaos = 1 # Set higher for RandomizedSimulator (0-40), lower for StreamSimulator (0-10)
-mode = "stream" # or "random"
-terrain = "grass" # clay, sand, rock, random
+chaos = 35 # Set higher for RandomizedSimulator (0-40), lower for StreamSimulator (0-10)
+mode = "random" # or "random"
+terrain = "sand" # clay, sand, rock, random
 sim_name = f"{mode}_chaos_{chaos}"
 
 # Terrain options = grass, sand, rock, clay

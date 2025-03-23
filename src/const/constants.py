@@ -39,7 +39,10 @@ DURATION = 140  # Total duration of the simulation
 FRAME_RATE = 10  # Frames per second
 MAX_CHAOS = 100  # Maximum chaos level (likely affects randomization intensity)
 REFRACTORY = 10 # Number of frames between objects being placed on a certain side of the road
-OBJECT_PLACEMENT_PROB = 0.05 # The probability of placing a road object on any given frame
+OBJECT_PLACEMENT_PROB = 0.50 # The probability of placing a road object on any given frame
+
+# Model Settings
+INPUT_SIZE = 128
 
 # Debugging
 DEBUG = False  # Enable/disable debug mode

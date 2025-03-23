@@ -21,6 +21,10 @@ class RandomPlacementGenerator:
         self.deviation = deviation
 
     def randomize_placement(self, fixed:bool = False):
+        """
+            Spawns a roadside object with a random placement within a valid range from the road lines. 
+        
+        """
         delta_x = self.right_edge - self.left_edge
         dev = max(delta_x * (random.random() % self.deviation), MINIMUM_PLACEMENT_DEVIATION)
         if fixed:
