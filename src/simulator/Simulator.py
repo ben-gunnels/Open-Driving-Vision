@@ -25,7 +25,8 @@ class Simulator(ABC):
         frame_rate: int = 10,      # Default FPS
         chaos: int = 5,            # Default chaos level
         sim_name: str = "test",
-        terrain: str = "grass"
+        terrain: str = "grass",
+        video: bool = False
     ):
         """
             Initializes the parent simulator class.
@@ -50,6 +51,7 @@ class Simulator(ABC):
         self.sim_name = sim_name
         self.number_medians = int(self.number_frames / MEDIAN_LINES_PER_FRAME)
         self.horizon = HORIZON_HEIGHT * SCREEN_HEIGHT
+        self.video = video
 
         # Initialize class objects
         self.roadsign_generator = RoadSignGenerator(CENTER, BOUNDS)
@@ -91,7 +93,8 @@ class Simulator(ABC):
         pass
 
     def create_video(self):
-        video_playback(self.sim_name, self.frame_rate)
+        if self.video:
+            video_playback(self.sim_name, self.frame_rate)
 
     def remove_invalid_objects(self):
         i = 0

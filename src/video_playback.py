@@ -1,6 +1,6 @@
 import cv2
 import os
-from .const.constants import FRAME_RATE, IMG_OUTPUT_PATH, VIDEO_OUTPUT_PATH, IMAGE_SEGMENTATION_PATH
+from .const.constants import FRAME_RATE, IMG_OUTPUT_PATH, VIDEO_OUTPUT_PATH, IMAGE_SEGMENTATION_PATH, MAX_VIDEO_LENGTH
 
 # Image folder path
 image_folder = IMG_OUTPUT_PATH
@@ -10,6 +10,8 @@ def video_playback(name: str, frame_rate: int=FRAME_RATE, image_folder=image_fol
     video_filename = os.path.join(VIDEO_OUTPUT_PATH, f"{name}.mp4")  # Specify output path
     # Get image files sorted by name
     images = [img for img in os.listdir(image_folder) if img.endswith(".png")]
+    
+    images = images[:MAX_VIDEO_LENGTH]
 
     # Read the first image to get dimensions
     frame = cv2.imread(os.path.join(image_folder, images[0]))

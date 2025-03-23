@@ -14,7 +14,8 @@ class RandomizedSimulator(Simulator):
             frame_rate: int, 
             chaos: int=2, 
             sim_name: str="random_test",
-            terrain: str = "random"
+            terrain: str = "random",
+            video: bool = False
         ):
         # Randomize the terrain if set to random
         terrain = random.choice(["grass", "clay", "sand", "rock"]) if terrain == "random" else terrain
@@ -24,7 +25,8 @@ class RandomizedSimulator(Simulator):
             frame_rate=frame_rate, 
             chaos=chaos, 
             sim_name=sim_name, 
-            terrain=terrain
+            terrain=terrain,
+            video=video
         )
 
 

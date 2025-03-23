@@ -40,7 +40,7 @@ FRAME_RATE = 10  # Frames per second
 MAX_CHAOS = 100  # Maximum chaos level (likely affects randomization intensity)
 REFRACTORY = 10 # Number of frames between objects being placed on a certain side of the road
 OBJECT_PLACEMENT_PROB = 0.50 # The probability of placing a road object on any given frame
-
+MAX_VIDEO_LENGTH = 500
 # Model Settings
 INPUT_SIZE = 128
 

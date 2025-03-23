@@ -13,7 +13,8 @@ class StreamSimulator(Simulator):
             frame_rate: int, 
             chaos: int=2, 
             sim_name: str="stream_test",
-            terrain: str = "grass"
+            terrain: str = "grass",
+            video: bool = False,
         ):
         super().__init__(
             number_frames=number_frames, 
@@ -21,7 +22,8 @@ class StreamSimulator(Simulator):
             frame_rate=frame_rate, 
             chaos=chaos, 
             sim_name=sim_name, 
-            terrain=terrain
+            terrain=terrain,
+            video=video
         )
 
         # Initialize the last frame that an object was placed

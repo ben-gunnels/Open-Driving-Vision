@@ -12,20 +12,24 @@ from .simulator.RandomizedSimulator import RandomizedSimulator
   StreamSimulator simulates a continuous driving experience.
   RandomizedSimulator generates random images of roadside objects. This is ideal for training a model on novel images.
 """
-
+import time
 # Key parameters
-number_frames = 150
+number_frames = 500
 moving_speed = 0.02 # Keep around 0.02
 frame_rate = 15
 chaos = 35 # Set higher for RandomizedSimulator (0-40), lower for StreamSimulator (0-10)
 mode = "random" # or "random"
 terrain = "sand" # clay, sand, rock, random
 sim_name = f"{mode}_chaos_{chaos}"
+video = False
 
+start = time.time()
 # Terrain options = grass, sand, rock, clay
 if mode == "stream":
-    sim = StreamSimulator(number_frames=number_frames, moving_speed=moving_speed, frame_rate=frame_rate, chaos=chaos, sim_name=sim_name, terrain=terrain)
+    sim = StreamSimulator(number_frames=number_frames, moving_speed=moving_speed, frame_rate=frame_rate, chaos=chaos, sim_name=sim_name, terrain=terrain, video=video)
 else:
-    sim = RandomizedSimulator(number_frames=number_frames, moving_speed=moving_speed, frame_rate=frame_rate, chaos=chaos, sim_name=sim_name, terrain=terrain)
+    sim = RandomizedSimulator(number_frames=number_frames, moving_speed=moving_speed, frame_rate=frame_rate, chaos=chaos, sim_name=sim_name, terrain=terrain, video=video)
 if sim:
     sim.run()
+
+print(f"{time.time() - start}s elapsed")
