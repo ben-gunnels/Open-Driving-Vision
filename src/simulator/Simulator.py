@@ -1,4 +1,5 @@
 import os
+import random
 import shutil
 import logging
 import cv2
@@ -128,6 +129,9 @@ class Simulator(ABC):
 
         if terrain in terrain_colors:
           self.terrain = terrain_colors[terrain]
+        
+        if terrain == "random":
+            self.terrain = "random"
 
     def _initialize_frames(self):
         """
@@ -137,11 +141,12 @@ class Simulator(ABC):
         self.frames = [np.zeros((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) for _ in range(self.number_frames)]
 
         for frame in self.frames:
+            ground_color = self.terrain if self.terrain != "random" else random.choice([colors.grass_green, colors.sand, colors.rock, colors.clay])
             for line in ROAD_LINES:
-                if self.terrain == "random":
-                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], random.choice([colors.grass_green, colors.sand, colors.rock, colors.clay]))  # Fill with white
+                if line in { "left_ground", "right_ground" }:
+                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], ground_color) 
                 else:
-                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], self.terrain)  # Fill with white
+                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], colors.white)
                 if DEBUG:
                     # Draws a circle at the centerpoint of the frame
                     cv2.circle(frame, (int(CENTER[0]), int(CENTER[1])), radius=3, color=colors.red, thickness=1)
