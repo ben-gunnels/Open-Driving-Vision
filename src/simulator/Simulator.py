@@ -139,7 +139,7 @@ class Simulator(ABC):
         for frame in self.frames:
             for line in ROAD_LINES:
                 if self.terrain == "random":
-                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], random.choice(colors.grass_green, colors.sand, colors.rock, colors.clay))  # Fill with white
+                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], random.choice([colors.grass_green, colors.sand, colors.rock, colors.clay])  # Fill with white
                 else:
                   cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], self.terrain)  # Fill with white
                 if DEBUG:
