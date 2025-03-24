@@ -4,7 +4,7 @@ from collections import deque
 from .Simulator import Simulator
 from ..sim_objects.Point import Point
 from ..algorithms.Algorithms import find_new_head
-from ..const.constants import (SCREEN_HEIGHT, CENTER, BOUNDS, OBJECT_PLACEMENT_PROB)
+from ..const.constants import (SCREEN_HEIGHT, CENTER, BOUNDS, OBJECT_PLACEMENT_PROB, TERRAINS)
 
 class RandomizedSimulator(Simulator):
     def __init__(
@@ -18,7 +18,8 @@ class RandomizedSimulator(Simulator):
             video: bool = False
         ):
         # Randomize the terrain if set to random
-        terrain = random.choice(["grass", "clay", "sand", "rock"]) if terrain == "random" else terrain
+
+        terrain = random.choice(TERRAINS) if terrain == "random" else terrain
         super().__init__(
             number_frames=number_frames, 
             moving_speed=moving_speed, 
@@ -37,6 +38,8 @@ class RandomizedSimulator(Simulator):
         for i in range(self.number_frames):
             self.road_objects = deque([]) # Reset the road objects
             self.log(f"ITERATION: {i}")
+
+            self._initialize_terrain(random.choice(TERRAINS))
 
             self._randomly_place_objects("left")
             self._randomly_place_objects("right")

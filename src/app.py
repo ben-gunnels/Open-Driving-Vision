@@ -19,7 +19,7 @@ moving_speed = 0.02 # Keep around 0.02
 frame_rate = 15
 chaos = 35 # Set higher for RandomizedSimulator (0-40), lower for StreamSimulator (0-10)
 mode = "random" # or "random"
-terrain = "sand" # clay, sand, rock, random
+terrain = "random" # clay, sand, rock, random
 sim_name = f"{mode}_chaos_{chaos}"
 video = False
 
