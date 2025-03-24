@@ -17,9 +17,6 @@ class RandomizedSimulator(Simulator):
             terrain: str = "random",
             video: bool = False
         ):
-        # Randomize the terrain if set to random
-
-        terrain = random.choice(TERRAINS) if terrain == "random" else terrain
         super().__init__(
             number_frames=number_frames, 
             moving_speed=moving_speed, 
@@ -38,9 +35,7 @@ class RandomizedSimulator(Simulator):
         for i in range(self.number_frames):
             self.road_objects = deque([]) # Reset the road objects
             self.log(f"ITERATION: {i}")
-
-            self._initialize_terrain(random.choice(TERRAINS))
-
+            
             self._randomly_place_objects("left")
             self._randomly_place_objects("right")
             # Animate and move the objects
