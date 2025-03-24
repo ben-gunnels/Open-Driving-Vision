@@ -126,9 +126,8 @@ class Simulator(ABC):
             "clay": colors.clay
         }
 
-        if terrain not in terrain_colors:
-            terrain = "grass"
-        self.terrain = terrain_colors[terrain]
+        if terrain in terrain_colors:
+          self.terrain = terrain_colors[terrain]
 
     def _initialize_frames(self):
         """
@@ -139,7 +138,10 @@ class Simulator(ABC):
 
         for frame in self.frames:
             for line in ROAD_LINES:
-                cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], self.terrain)  # Fill with white
+                if self.terrain == "random":
+                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], random.choice(colors.grass_green, colors.sand, colors.rock, colors.clay))  # Fill with white
+                else:
+                  cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], self.terrain)  # Fill with white
                 if DEBUG:
                     # Draws a circle at the centerpoint of the frame
                     cv2.circle(frame, (int(CENTER[0]), int(CENTER[1])), radius=3, color=colors.red, thickness=1)
