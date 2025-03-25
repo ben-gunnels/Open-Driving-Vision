@@ -19,6 +19,12 @@ from ..const.constants import (SCREEN_HEIGHT, SCREEN_WIDTH, HORIZON_HEIGHT, CENT
 colors = Colors()
 
 class Simulator(ABC):
+    terrain_colors = {
+            "grass": colors.grass_green,
+            "sand": colors.sand,
+            "rock": colors.rock,
+            "clay": colors.clay
+        }
     def __init__(
         self, 
         number_frames: int = DURATION,  # Default frame count
@@ -120,15 +126,9 @@ class Simulator(ABC):
         """
             Sets the terrain color for the space between the road and the horizon. 
         """
-        terrain_colors = {
-            "grass": colors.grass_green,
-            "sand": colors.sand,
-            "rock": colors.rock,
-            "clay": colors.clay
-        }
 
-        if terrain in terrain_colors:
-          self.terrain = terrain_colors[terrain]
+        if terrain in self.terrain_colors:
+          self.terrain = self.terrain_colors[terrain]
         
         if terrain == "random":
             self.terrain = "random"
@@ -136,12 +136,13 @@ class Simulator(ABC):
     def _initialize_frames(self):
         """
             Initializes the frames as numpy arrays based on the input size.
+            Generates the standard drawing that each image includes: road lines, ground, center (optional).
             Creates n frames of BGR values of size SCREEN_HEIGHT X SCREEN_WIDTH
         """
         self.frames = [np.zeros((SCREEN_HEIGHT, SCREEN_WIDTH, 3), dtype=np.uint8) for _ in range(self.number_frames)]
 
         for frame in self.frames:
-            ground_color = self.terrain if self.terrain != "random" else random.choice([colors.grass_green, colors.sand, colors.rock, colors.clay])
+            ground_color = self.terrain if self.terrain != "random" else random.choice(self.terrain_colors.values())
             for line in ROAD_LINES:
                 if line in { "left_ground", "right_ground" }:
                   cv2.fillPoly(frame, [ROAD_LINES[line]["geo"]], ground_color) 

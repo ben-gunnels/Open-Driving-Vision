@@ -35,31 +35,34 @@ class RoadSign(RoadObject):
     
     def draw(self, img, mask_img):
         """
-            Draw the shape of the road object at its current position.
-            Saves the main shape as a mask
-            Params: img (np array)
+        Draws the shape of the road object at its current position and saves the main shape as a mask.
+        
+        Parameters:
+            img (np.array): The image where the object is drawn.
+            mask_img (np.array): The mask image for storing labeled regions.
         """
-        valid = self.validate()
-
-        if not valid:
+        if not self.validate():
             return
         
-        if self.reverse_sign:
-            primary_col = colors.silver if self.name != "traffic_cone" else self.primary_color
-            cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], primary_col)  # Fill with red
-            self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value[1])  # Fill with label for backward
+        # Determine colors based on reverse sign
+        sign_color = colors.silver if self.reverse_sign and self.name != "traffic_cone" else self.primary_color
+        mask_label = self.label_value[1] if self.reverse_sign else self.label_value[0]
 
-            if self.name != "traffic_cone":
-                cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
-                if self.pole_type == "double":
-                    cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole2_points], dtype=np.int32)], self.secondary_color)
-        else:
-            if self.name != "traffic_cone":
-                cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)], self.secondary_color)
-                if self.pole_type == "double":
-                    cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.pole2_points], dtype=np.int32)], self.secondary_color)
-            cv2.fillPoly(img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.primary_color)  # Fill with red
-            self.mask = cv2.fillPoly(mask_img, [np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)], self.label_value[0])  # Fill with label for forward
+        # Convert points to NumPy arrays
+        sign_pts = np.array([(int(pt.x), int(pt.y)) for pt in self.sign_points], dtype=np.int32)
+        
+        # Draw sign shape
+        cv2.fillPoly(img, [sign_pts], sign_color)
+        self.mask = cv2.fillPoly(mask_img, [sign_pts], mask_label)
+
+        # Draw pole if present
+        if self.pole_type != "none":
+            pole_pts = np.array([(int(pt.x), int(pt.y)) for pt in self.pole_points], dtype=np.int32)
+            cv2.fillPoly(img, [pole_pts], self.secondary_color)
+
+            if self.pole_type == "double":
+                pole2_pts = np.array([(int(pt.x), int(pt.y)) for pt in self.pole2_points], dtype=np.int32)
+                cv2.fillPoly(img, [pole2_pts], self.secondary_color)
 
     def validate(self):
         """ 

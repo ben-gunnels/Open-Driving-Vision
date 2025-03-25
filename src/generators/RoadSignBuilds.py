@@ -88,7 +88,7 @@ class Builder():
                     "primary_color": colors.orange,
                     "secondary_color": colors.white,
                     "label_value": (15, 15), # Should be changed to just 1 label
-                    "pole_type": "normal"
+                    "pole_type": "none"
                 }
             },
             "mile_marker":{

@@ -51,7 +51,7 @@ class RoadSignGenerator:
         start_sign_point = self._get_sign_start_point(pole, roadsign_params["kwargs"]["pole_type"])
         ["kwargs"]
         # Map the signs to their functions
-        funcs = {
+        functs = {
             "diamond_warning_sign": self.builder.build_diamond_sign(start_sign_point),
             "speed_limit_sign": self.builder.build_speed_limit_sign(start_sign_point),
             "stop_sign": self.builder.build_stop_sign(start_sign_point),
@@ -66,7 +66,7 @@ class RoadSignGenerator:
             "mile_marker": self.builder.build_mile_marker(start_sign_point)
         }
 
-        main_shape = funcs[roadsign_name]
+        main_shape = functs[roadsign_name]
 
         roadsign_params["args"][0] = main_shape
         roadsign_params["args"][1] = pole

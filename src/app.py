@@ -17,11 +17,11 @@ import time
 number_frames = 500
 moving_speed = 0.02 # Keep around 0.02
 frame_rate = 15
-chaos = 35 # Set higher for RandomizedSimulator (0-40), lower for StreamSimulator (0-10)
-mode = "random" # or "random"
-terrain = "random" # clay, sand, rock, random
+chaos = 2 # Set higher for RandomizedSimulator (0-40), lower for StreamSimulator (0-10)
+mode = "stream" # or "random"
+terrain = "grass" # clay, sand, rock, grass, random
 sim_name = f"{mode}_chaos_{chaos}"
-video = False
+video = True
 
 start = time.time()
 # Terrain options = grass, sand, rock, clay
