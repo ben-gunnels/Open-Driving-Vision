@@ -2,7 +2,7 @@
 
 An open-source driving vision simulator designed for experimentation and research in autonomous driving perception.
 
-![Example Output](data/output283.png)
+![Example Output](/data/output283.png)
 
 ### 🚀 Getting Started
 
